@@ -7,8 +7,19 @@ body {
     background-position: center top;
     background-repeat: no-repeat;
     background-attachment: fixed;}
+.clockbar {
+    text-align: center;}
+.footer-columns {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin: 10px;
+    gap: 20px;}
+.footer-copyright {
+    width: 100%;
+    text-align: left;
+    border-top: none;}
 img.align-center {
-    display: block;
+    display: inline-block;
     margin: 5px auto;
     box-align: center top;}
 li {
