@@ -62,3 +62,31 @@ Begin Sprint 2
 The session today led me to some decent changes that will make things a little more manageable in the future.
 I have added a content frame around the game area that will be the viewport for the player.  
 I have also moved the clock bar into the game area.  I am still debating if I want the clock bar to be above or below the content frame.  
+
+# Session SL-3
+
+## Planned Work
+
+Continue Sprint 1 and make sure that the main landing page has all the items I want in it.  For instance: What do I want in the lists at the bottom for Game, Community, Help & Support, and Team.
+
+## Completed Work
+
+The Nav Bar is properly set and the clock bar is in the right location:  
+
+## Parking Lot
+
+Item | Topic              | Status              |
+PL-1 | Game Area Page     | Under Consideration |
+PL-2 | Clock Bar Position | Implemented         |
+
+## Decisions Made
+
+Clock Bar is inside the Content Viewer
+
+## Next Session Objectives
+
+Get the footer list to not have a gap between the header and the listed items.  
+
+## Session Notes
+
+Not much to go on for this one.  I am tweaking small things to get them to where I want them.  

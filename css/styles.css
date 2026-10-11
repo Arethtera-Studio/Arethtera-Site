@@ -10,13 +10,15 @@ body {
 .clockbar {
     text-align: center;
     position: absolute;
-    top: 5%;}
+    top: 14%;
+    display: flex;
+    justify-content: center;}
 .footer-columns {
+    text-indent: 0%;
+    width: 100%;
     display: flex;
     justify-content: center;
-    grid-template-columns: repeat(4, 1fr);
-    margin: 10px;
-    gap: 20px;}
+    grid-template-columns: repeat(4, 1fr);}
 .footer-copyright {
     width: 100%;
     text-align: center;
@@ -24,7 +26,6 @@ body {
 .content-frame {
     width: 100%;
     max-width: none;
-    box-sizing: border-box;
     margin: 0;
     left: 0;
     right: 0;
@@ -38,14 +39,23 @@ body {
     top: 50%;}
 img.align-center {
     display: inline-block;
-    margin: 5px auto;
+    margin: 5px;
     box-align: center top;}
 li {
     margin: 0px auto;
     display: inline-block;
-    padding: 0px 10px;}
-nav {
-    text-align: center;}
+    padding: 0px 0px;}
+.navbar {
+    text-align: center;
+    position: absolute;
+    top: 0%;
+    left: 20%;
+    display: flex;
+    justify-content: center;}
+.navbar-text {
+    padding-right: 20px;
+    padding-left: 20px;
+    display:inline-block;}
 .player-clock {}
 .site-header {
     display: flex;
