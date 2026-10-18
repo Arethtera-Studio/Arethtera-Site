@@ -13,3 +13,7 @@
 ## DL-3 
     
     Clock Bar is inside the Viewport.  
+
+## DL-4
+
+    Renamed index.html to main.html to signify the main landing page.  

@@ -90,3 +90,33 @@ Get the footer list to not have a gap between the header and the listed items.
 ## Session Notes
 
 Not much to go on for this one.  I am tweaking small things to get them to where I want them.  
+
+# SL-4
+
+Date: 10/16/26
+
+## Planned Work
+
+Rectify spacing issue on footer menus.
+
+## Completed Work
+
+Spacing Issue on the footer menu and the nav bar has been completed. 
+
+## Parking Lot
+
+Item | Page               | Topic              | Status              |
+PL-1 | main.html          | Game Area Page     | Decision Made       |
+PL-2 | main.html          | Clock Bar Position | Implemented         |
+
+## Decisions Made
+
+DL-4 renamed index.html to main.html to signify the main landing page and make it easier to identify.  
+
+## Next Session Objectives
+
+Break up the info area into sections so that I can display site introduction, site log in, and news.  
+
+## Session Notes
+
+No Notes
