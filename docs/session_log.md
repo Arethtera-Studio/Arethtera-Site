@@ -134,14 +134,37 @@ Break up info area into sections for:
 
 ## Completed Work
 
+Main page now has 3 distinct content sections
+    Site Introduction
+    Site Log In
+    News
+
 ## Parking Lot
 
 Item | Page               | Topic              | Status              |
 PL-1 | main.html          | Game Area Page     | Decision Made       |
 PL-2 | main.html          | Clock Bar Position | Implemented         |
+PL-3 | news               | Auto Update        | Under Consideration |
+PL-4 | forums             | Integrated or 3rd  | Under Consideration |
+PL-5 | History            | Current Projects   | Under Consideration |
 
 ## Decisions Made
 
-## NExt Session Objectives
+Added in actual dividing bars that more resemble the actual frame for the main page dividers.
+
+Need to create pages for each of the Main Navigation links.
+    Help
+        F.A.Q.
+        Guide
+        Support Ticket
+    News - Top News loads into the main landing page
+    Game
+    Forums - Integrated or 3rd Party
+    Contact - Developer Contact
+    History - Arethtera Studio History
+
+## Next Session Objectives
+
+Start creating the place holder pages for Sprint 2 Epic 1 
 
 ## Session Notes
