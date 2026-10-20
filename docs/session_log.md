@@ -120,3 +120,28 @@ Break up the info area into sections so that I can display site introduction, si
 ## Session Notes
 
 No Notes
+
+# SL-5
+
+Date: 10/19/26
+
+## Planned Work
+
+Break up info area into sections for:
+    Site Introduction
+    Site Log In
+    News
+
+## Completed Work
+
+## Parking Lot
+
+Item | Page               | Topic              | Status              |
+PL-1 | main.html          | Game Area Page     | Decision Made       |
+PL-2 | main.html          | Clock Bar Position | Implemented         |
+
+## Decisions Made
+
+## NExt Session Objectives
+
+## Session Notes
