@@ -1,4 +1,3 @@
-
 name: Deploy Arethtera Website
 
 on:
@@ -16,13 +15,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-            - name: Configure SSH
+      - name: Configure SSH
         env:
           DEPLOY_SSH_KEY_B64: ${{ secrets.DEPLOY_SSH_KEY_B64 }}
           DEPLOY_KNOWN_HOSTS: ${{ secrets.DEPLOY_KNOWN_HOSTS }}
         run: |
           set -eu
-
           mkdir -p "$HOME/.ssh"
           chmod 700 "$HOME/.ssh"
 
@@ -33,6 +31,7 @@ jobs:
           chmod 600 "$HOME/.ssh/known_hosts"
 
           ssh-keygen -y -f "$HOME/.ssh/deploy_key" > /dev/null
+
       - name: Deploy website
         env:
           DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
