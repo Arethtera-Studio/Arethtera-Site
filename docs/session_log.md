@@ -91,7 +91,7 @@ Get the footer list to not have a gap between the header and the listed items.
 
 Not much to go on for this one.  I am tweaking small things to get them to where I want them.  
 
-# SL-4
+# Session SL-4
 
 Date: 10/16/26
 
@@ -121,7 +121,7 @@ Break up the info area into sections so that I can display site introduction, si
 
 No Notes
 
-# SL-5
+# Session SL-5
 
 Date: 10/19/26
 
@@ -166,5 +166,28 @@ Need to create pages for each of the Main Navigation links.
 ## Next Session Objectives
 
 Start creating the place holder pages for Sprint 2 Epic 1 
+
+## Session Notes
+
+# Session Log SL-5
+
+    Date: 10/24/26
+
+## Planned Work
+
+    Start creating the place holder pages for Sprint 2 Epic 1
+
+## Completed Work
+
+## Parking Lot
+
+Item | Page               | Topic              | Status              |
+PL-1 | main.html          | Game Area Page     | Decision Made       |
+PL-2 | main.html          | Clock Bar Position | Implemented         |
+PL-3 | news               | Auto Update        | Under Consideration |
+PL-4 | forums             | Integrated or 3rd  | Under Consideration |
+PL-5 | History            | Current Projects   | Under Consideration |
+
+## Next Session Objectives
 
 ## Session Notes
