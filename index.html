@@ -67,7 +67,54 @@
                 </section>
                 <section class="site-news">
                     <h2>Site News</h2>
-                    <p>News and Announcements go here.</p>
+                    <div id="nodebb-recent-posts">Loading latest forum activity...</div>
+                        <script>
+                        // 1. Set your configuration
+                        const FORUM_URL = 'https://forum.arethtera.com'; // Your NodeBB base URL
+                        const CATEGORY_ID = '1';                   // Your target category ID
+                        const POSTS_COUNT = 3;                     // Number of posts to show
+
+                        // 2. Fetch the clean JSON data natively from NodeBB
+                        fetch(`${FORUM_URL}/api/category/${CATEGORY_ID}`)
+                            .then(response => response.json())
+                            .then(data => {
+                            // NodeBB returns topics in an array called 'topics'
+                            const topics = data.topics.slice(0, POSTS_COUNT);
+                            let html = '';
+
+                            if (topics.length === 0) {
+                                document.getElementById('nodebb-recent-posts').innerHTML = 'No recent posts found.';
+                                return;
+                            }
+
+                            // 3. Loop through and build your clean HTML structure
+                            topics.forEach(topic => {
+                                const topicLink = `${FORUM_URL}/topic/${topic.slug}`;
+                                const authorName = topic.user ? topic.user.username : 'Anonymous';
+                                
+                                html += `
+                                <div style="margin-bottom: 16px; padding-bottom: 12px; border-bottom: 0px solid #eaeaea; font-family: sans-serif;">
+                                    <h4 style="margin: 0 0 4px 0;">
+                                    <a href="${topicLink}" target="_blank" style="color: #0066cc; text-decoration: none; font-size: 1.1em;">
+                                        ${topic.title}
+                                    </a>
+                                    </h4>
+                                    <div style="font-size: 0.85em; color: #666;">
+                                    <span>By <strong>${authorName}</strong></span> • 
+                                    <span>Replies: ${topic.postcount - 1}</span> • 
+                                    <span>Views: ${topic.viewcount}</span>
+                                    </div>
+                                </div>
+                                `;
+                            });
+
+                            document.getElementById('nodebb-recent-posts').innerHTML = html;
+                            })
+                            .catch(error => {
+                            console.error('Error fetching NodeBB data:', error);
+                            document.getElementById('nodebb-recent-posts').innerHTML = 'Unable to load forum posts at this time.';
+                            });
+                        </script>
                 </section>
             </div>
         </section>
