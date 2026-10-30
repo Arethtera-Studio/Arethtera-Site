@@ -23,12 +23,40 @@
             </div>
             <div class="site-layout">
                 <section class="site-intro">
-                    <h2>Site Intro</h2>
-                    <p>THIS TEST IS WORKING</p>
+                    <h2>Welcome...</h2>
+                    <div>to a world of Fantasy and Magic. Those who<br>
+                        venture forth into the lands of Arethtera will<br>
+                        learn a new way of living.  Everything you do<br>
+                        will have an effect on something else in the<br>
+                        world. So do what you will but be prepared to<br>
+                        reep the rewards or suffer the consequences.
+                    </div>
+                    <p></p>
+                    <div class="register_button">
+                        <input type="submit" class="submit" id="register_button">
+                    </div>
                 </section>
                 <section class="site-login">
-                    <h2>Site Login</h2>
-                    <p>Login area placeholder</p>
+                    <h2 id="login">Login</h2>
+                    <form id="login_form" action="#" method="post">                        
+                        <label for="user" class="login-input">
+                            <span>User Name:</span>
+                            <input id="user" name="username" type="text" value autofocus>
+                        </label>
+                        <p>
+                        <label for="password" class="login-input">
+                            <span>Password:</span>
+                            <input name="clear" type="hidden" value="true">
+                            <input id="password" name="password" type="password">
+                        </label>
+                        <p>
+                        <label for="remember-me" class="remember_me">
+                            <span class="remember-me">Remember me</span>
+                            <input id="remember-me" type="checkbox" name="remember-me" checked="checked">
+                        </label>
+                        <p>
+                            <input type="submit" class="submit" id="login_submit_button">
+                    </form>
                 </section>
                 <section class="site-news">
                     <h2>Site News</h2>
