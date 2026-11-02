@@ -10,6 +10,9 @@ body {
     background-position: center top;
     background-repeat: no-repeat;
     background-attachment: fixed;}
+button {
+    background: transparent;
+    border: none;}
 .clockbar {
     text-align: center;
     position: absolute;
@@ -59,8 +62,6 @@ img.align-center {
     padding-left: 20px;
     padding-right: 20px;
     color:#834600;}
-.register_button{
-    text-transform: "Register";}
 .site-header {
     display: flex;
     justify-content: center;
