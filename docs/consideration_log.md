@@ -4,7 +4,7 @@
 ## ID
     Subject                                                                         Status
 
-## C-001
+## C-001    
     Centralized authentication provider, including Keycloak and OpenID Connect.     Under Consideration
 
 ## C-002
@@ -24,3 +24,7 @@
 
 ## C-007
     Infrastructure and regional distribution for thousands of concurrent players.   Under Consideration
+
+## C-008
+    The specific progression systems and advancement mechanics for different
+    professions and lifestyles.                                                     Under Consideration
