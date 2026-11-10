@@ -1,10 +1,10 @@
 # Arethtera
 ## Overall Game Concept
 ### Section 1: Game Overview
-### Scope
+#### Scope
     This section establishes the identity, purpose, and overall vision of Arethtera. It defines the experience the game intends to provide, the principles that guide its design, and the characteristics that distinguish it from traditional role-playing games.
 
-### 1.1 Game Concept and Premise
+#### 1.1 Game Concept and Premise
 
     Arethtera is a persistent, high-fantasy medieval world in which players determine their own professions, lifestyles, ambitions, and place in society. Players are not required to become adventurers or participate in combat to experience meaningful progression or contribute to the world.
     
@@ -18,7 +18,7 @@
     
     These concepts are distinct but interconnected. A player's identity and experience are not limited to a single occupation or prescribed path.
 
-### 1.2 Genre and Setting
+#### 1.2 Genre and Setting
 
     Arethtera is a high-fantasy life simulation MMORPG set in a persistent medieval-style world.
     
@@ -26,7 +26,7 @@
     
     NPCs will be active participants in the world rather than simply background characters, quest providers, or enemies. They will have meaningful roles in the functioning of society. The specific professions, responsibilities, routines, and systems governing NPC behavior will be defined in the relevant game-design sections.
 
-### 1.3 Overall Vision
+#### 1.3 Overall Vision
 
     Arethtera Studio's vision is to create a world where players can experience a way of life beyond the expectations of a traditional MMORPG. Players should be able to choose their own goals, develop their own capabilities, and make a place for themselves in the world.
     
@@ -42,7 +42,7 @@
     
     Players will also have influence over the shaping and development of the world. Their decisions and activities can contribute to the evolution of society. The extent and mechanics of that influence will be defined by the systems governing the world.
 
-### 1.4 Core Design Philosophy
+#### 1.4 Core Design Philosophy
 
     Arethtera is designed around player choice, meaningful progression, and a world with its own rules and structure.
     
@@ -54,7 +54,7 @@
     
     Arethtera is also intended to grow and develop over time. The game will be designed to support future expansion through additional professions, territories, economic opportunities, activities, and world systems. This is a long-term direction; specific future features and release plans will be determined separately.
 
-### 1.5 Game Difference
+#### 1.5 Game Difference
 
     The defining difference between Arethtera and many traditional RPGs and MMORPGs is that adventuring is an option, not a requirement.
     
@@ -66,7 +66,7 @@
     
     The goal is not to remove adventuring from the MMORPG experience. It is to remove the requirement to adventure in order to progress, achieve, and participate meaningfully in the world.
 
-### 1.6 Intended Experience
+#### 1.6 Intended Experience
 
     Arethtera is intended to provide a high-fantasy life simulation experience in a world that includes magic, monsters, and other elements appropriate to its setting.
     
@@ -77,3 +77,21 @@
     Arethtera is intended to expand over time. Additional professions, territories, economic opportunities, activities, and world systems may be introduced through future updates. The professions and activities included in the initial release, as well as those reserved for later updates, have not yet been determined and will be established during further design work.
     
     The intended experience is a living fantasy world in which players can choose how they participate, pursue meaningful goals through different paths, and help shape the society around them. Arethtera does not prescribe one correct way to play: players create their own place in the world.
+
+### Section 2: World and Setting
+
+#### Scope
+
+#### 2.1 Fantasy Setting and Atmosphere
+
+#### 2.2 World History and Lore
+
+#### 2.3 Geography and Land Types
+
+#### 2.4 Kingdoms, Territories, and Political Structures
+
+#### 2.5 Cities, Towns, Villages, and Settlements
+
+#### 2.6 Wilderness and Unexplored Territories
+
+#### 2.7 World Ownership and Control
