@@ -32,7 +32,7 @@ button{font:inherit}
 .hero{min-height:590px;display:flex;align-items:center;position:relative;overflow:hidden;background:
  linear-gradient(90deg,rgba(8,8,7,.08) 0%,rgba(8,8,7,.22) 42%,rgba(8,8,7,.84) 100%),
  linear-gradient(0deg,rgba(9,8,7,.75),transparent 35%),
- url("assets/hero-kingdom.jpg") left center/cover no-repeat,#27231b}
+ url("images/hero-kingdom.png") left center/cover no-repeat,#27231b}
 .hero:after{content:"";position:absolute;inset:12px;border:1px solid rgba(215,181,119,.42);pointer-events:none}
 .hero-content{position:relative;z-index:1;width:min(590px,48%);margin-left:auto;margin-right:max(5vw,calc((100vw - 1320px)/2));padding:70px 20px 80px;text-align:center}
 .eyebrow{color:var(--gold);text-transform:uppercase;letter-spacing:.23em;font-size:.78rem}
@@ -66,7 +66,7 @@ button{font:inherit}
 .region-copy p{margin:2px 0 0;font-size:.9rem;color:#e9dcc4}
 .life{background:radial-gradient(ellipse at 50% 0,#28231b,#11100e 65%)}
 .life-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:42px;align-items:center}
-.life-art{min-height:410px;background:linear-gradient(0deg,rgba(10,9,7,.4),transparent),url("assets/market.jpg") center/cover;border:1px solid var(--line);position:relative}
+.life-art{min-height:410px;background:linear-gradient(0deg,rgba(10,9,7,.4),transparent),url("images/market.png") center/cover;border:1px solid var(--line);position:relative}
 .life-art:after{content:"";position:absolute;inset:12px;border:1px solid rgba(225,190,125,.5)}
 .life-copy h2{font-size:clamp(2rem,4vw,3.2rem);font-weight:400;color:var(--gold2);line-height:1.1;margin:0 0 14px}
 .life-copy>p{color:#c4b79f;font-size:1.05rem}
@@ -156,10 +156,10 @@ footer{padding:28px;background:#0b0a09;border-top:1px solid var(--line);color:#8
  <div class="section-inner">
   <div class="section-heading"><div class="eyebrow">Beyond the city walls</div><h2>Explore the Realm of Arethtera</h2><p>A diverse realm of kingdoms, peoples, and lands — each with its own opportunities and challenges.</p></div>
   <div class="region-grid">
-   <a class="region" href="#journey"><img src="assets/thalorien.jpg" alt="Castle city among mountains"><div class="region-copy"><h3>Thalorien</h3><p>The Royal Capital</p></div></a>
-   <a class="region" href="#journey"><img src="assets/valewood.jpg" alt="Green farmland and village"><div class="region-copy"><h3>Valewood</h3><p>Fertile Lands &amp; Village Life</p></div></a>
-   <a class="region" href="#journey"><img src="assets/kargrim.jpg" alt="Mountain settlement"><div class="region-copy"><h3>Kargrim</h3><p>The Mountain Holds</p></div></a>
-   <a class="region" href="#journey"><img src="assets/elenwynn.jpg" alt="Ancient woodland realm"><div class="region-copy"><h3>Elenwynn</h3><p>The Woodland Realms</p></div></a>
+   <a class="region" href="#journey"><img src="images/thalorien.png" alt="Castle city among mountains"><div class="region-copy"><h3>Thalorien</h3><p>The Royal Capital</p></div></a>
+   <a class="region" href="#journey"><img src="images/valewood.png" alt="Green farmland and village"><div class="region-copy"><h3>Valewood</h3><p>Fertile Lands &amp; Village Life</p></div></a>
+   <a class="region" href="#journey"><img src="images/kargrim.png" alt="Mountain settlement"><div class="region-copy"><h3>Kargrim</h3><p>The Mountain Holds</p></div></a>
+   <a class="region" href="#journey"><img src="images/elenwynn.png" alt="Ancient woodland realm"><div class="region-copy"><h3>Elenwynn</h3><p>The Woodland Realms</p></div></a>
   </div>
  </div>
 </section>
@@ -215,6 +215,9 @@ footer{padding:28px;background:#0b0a09;border-top:1px solid var(--line);color:#8
 <div class="toast" id="toast" role="status" aria-live="polite">The gates are not open just yet. Stay tuned for the realm's launch.</div>
 
 <script>
+const FORUM_URL = "https://forum.arethtera.com";
+const CATEGORY_ID = 1;
+const POST_LIMIT = 3;
 const menuToggle=document.getElementById('menuToggle');
 const navLinks=document.getElementById('navLinks');
 menuToggle.addEventListener('click',()=>{
