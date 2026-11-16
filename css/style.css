@@ -23,7 +23,7 @@ button{font:inherit}
 .hero{min-height:590px;display:flex;align-items:center;position:relative;overflow:hidden;background:
  linear-gradient(90deg,rgba(8,8,7,.08) 0%,rgba(8,8,7,.22) 42%,rgba(8,8,7,.84) 100%),
  linear-gradient(0deg,rgba(9,8,7,.75),transparent 35%),
- url("images/hero-kingdom.png") left center/cover no-repeat,#27231b}
+ url("../images/hero-kingdom.png") left center/cover no-repeat,#27231b}
 .hero:after{content:"";position:absolute;inset:12px;border:1px solid rgba(215,181,119,.42);pointer-events:none}
 .hero-content{position:relative;z-index:1;width:min(590px,48%);margin-left:auto;margin-right:max(5vw,calc((100vw - 1320px)/2));padding:70px 20px 80px;text-align:center}
 .eyebrow{color:var(--gold);text-transform:uppercase;letter-spacing:.23em;font-size:.78rem}
@@ -57,7 +57,7 @@ button{font:inherit}
 .region-copy p{margin:2px 0 0;font-size:.9rem;color:#e9dcc4}
 .life{background:radial-gradient(ellipse at 50% 0,#28231b,#11100e 65%)}
 .life-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:42px;align-items:center}
-.life-art{min-height:410px;background:linear-gradient(0deg,rgba(10,9,7,.4),transparent),url("images/market.png") center/cover;border:1px solid var(--line);position:relative}
+.life-art{min-height:410px;background:linear-gradient(0deg,rgba(10,9,7,.4),transparent),url("../images/market.png") center/cover;border:1px solid var(--line);position:relative}
 .life-art:after{content:"";position:absolute;inset:12px;border:1px solid rgba(225,190,125,.5)}
 .life-copy h2{font-size:clamp(2rem,4vw,3.2rem);font-weight:400;color:var(--gold2);line-height:1.1;margin:0 0 14px}
 .life-copy>p{color:#c4b79f;font-size:1.05rem}
@@ -78,7 +78,7 @@ button{font:inherit}
 .community-stat strong{color:var(--gold2);font-weight:400}
 .community-note{color:var(--muted);font-size:.92rem;margin:16px 0 22px}
 .join{width:100%}
-.cta{padding:78px 28px;background:linear-gradient(90deg,rgba(13,11,8,.92),rgba(13,11,8,.72)),url("assets/hero-kingdom.jpg") center 58%/cover}
+.cta{padding:78px 28px;background:linear-gradient(90deg,rgba(13,11,8,.92),rgba(13,11,8,.72)),url("../images/hero-kingdom.jpg") center 58%/cover}
 .cta-inner{max-width:1000px;margin:auto;text-align:center}
 .cta h2{font-size:clamp(2.3rem,5vw,4rem);font-weight:400;color:var(--gold2);margin:0 0 10px}
 .cta p{color:#d1c3a8;max-width:620px;margin:0 auto 26px;font-size:1.05rem}
