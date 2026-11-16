@@ -78,7 +78,7 @@ button{font:inherit}
 .community-stat strong{color:var(--gold2);font-weight:400}
 .community-note{color:var(--muted);font-size:.92rem;margin:16px 0 22px}
 .join{width:100%}
-.cta{padding:78px 28px;background:linear-gradient(90deg,rgba(13,11,8,.92),rgba(13,11,8,.72)),url("../images/hero-kingdom.jpg") center 58%/cover}
+.cta{padding:78px 28px;background:linear-gradient(90deg,rgba(13,11,8,.92),rgba(13,11,8,.72)),url("../images/hero-kingdom.png") center 58%/cover}
 .cta-inner{max-width:1000px;margin:auto;text-align:center}
 .cta h2{font-size:clamp(2.3rem,5vw,4rem);font-weight:400;color:var(--gold2);margin:0 0 10px}
 .cta p{color:#d1c3a8;max-width:620px;margin:0 auto 26px;font-size:1.05rem}
