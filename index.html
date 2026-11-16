@@ -185,6 +185,9 @@ footer{padding:28px;background:#0b0a09;border-top:1px solid var(--line);color:#8
  <div class="section-inner news-grid">
   <div class="panel">
    <h2>Realm News</h2>
+    <div id="realmNewsFeed">
+        <p class="community-note">Loading announcements...</p>
+    </div>
   </div>
   <aside class="panel" id="community">
    <h2>The Community</h2>
@@ -215,6 +218,8 @@ footer{padding:28px;background:#0b0a09;border-top:1px solid var(--line);color:#8
 const FORUM_URL = "https://forum.arethtera.com";
 const CATEGORY_ID = 1;
 const POST_LIMIT = 3;
+const newsContainer =
+document.getElementById("realmNewsFeed");
 const menuToggle=document.getElementById('menuToggle');
 const navLinks=document.getElementById('navLinks');
 menuToggle.addEventListener('click',()=>{
