@@ -1,151 +1,240 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Arethtera</title>
-        <link rel="stylesheet" href="css/styles.css">
-    </head>
-    <body>
-        <header class="site-header">
-            <a href="index.html"><img src="images/arethtera.jpg" alt="Arethtera Logo"/>
-            </a>
-        </header>
-        <section class="content-frame">
-            <img src="images/content-frame.jpg" alt="Content Frame">
-            <div class="navbar">
-                <a href="index.html"><h2>HOME</h2></a>
-                <h2 class="nav-space">|</h2>
-                <a href="game.html"><h2>GAME</h2></a>
-                <h2 class="nav-space">|</h2>
-                <a href="https://forum.arethtera.com"><h2>NEWS</h2></a>
-                <h2 class="nav-space">|</h2>
-                <a href="help.html"><h2>HELP</h2></a>
-            </div>
-            <div class="site-layout">
-                <section class="site-intro">
-                    <h2>Welcome...</h2>
-                    <div>to a world of Fantasy and Magic. Those who<br>
-                        venture forth into the lands of Arethtera will<br>
-                        learn a new way of living.  Everything you do<br>
-                        will have an effect on something else in the<br>
-                        world. So do what you will but be prepared to<br>
-                        reep the rewards or suffer the consequences.
-                    </div>
-                    <p>
-                    <div>
-                        <button type="submit">
-                            <a href="register.html"><img src="images/register.png">
-                            </a>
-                        </button>
-                    </div>
-                </section>
-                <section class="site-login">
-                    <h2 id="login">Login</h2>
-                    <form id="login_form" action="#" method="post">                        
-                        <label for="user" class="login-input">
-                            <span>User Name:</span>
-                            <input id="user" name="username" type="text" value autofocus>
-                        </label>
-                        <p>
-                        <label for="password" class="login-input">
-                            <span>Password:</span>
-                            <input name="clear" type="hidden" value="true">
-                            <input id="password" name="password" type="password">
-                        </label>
-                        <p>
-                        <label for="remember-me" class="remember_me">
-                            <span class="remember-me">Remember me</span>
-                            <input id="remember-me" type="checkbox" name="remember-me" checked="checked">
-                        </label>
-                        <p>
-                            <button type="submit">
-                                <a href="game.html"><img src="images/login.png">
-                                </a>
-                            </button>
-                            <p>
-                                <a href="recover.html">Forgot Password</a>
-                    </form>
-                </section>
-                <section class="site-news">
-                    <h2>Site News</h2>
-                    <div id="nodebb-recent-posts">Loading latest forum activity...</div>
-                        <script>
-                        // 1. Set your configuration
-                        const FORUM_URL = 'https://forum.arethtera.com'; // Your NodeBB base URL
-                        const CATEGORY_ID = '1';                   // Your target category ID
-                        const POSTS_COUNT = 3;                     // Number of posts to show
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#11100e">
+<meta name="description" content="Arethtera — a high fantasy medieval life simulator. Build a life, forge your destiny, and shape a living realm.">
+<title>Arethtera — A World to Live. A Legacy to Build.</title>
+<style>
+:root{
+  --ink:#100f0d;--ink2:#191713;--gold:#c9a66a;--gold2:#e8d2a2;
+  --parchment:#e4d2ad;--parchment2:#cbb58a;--muted:#b7aa91;
+  --line:rgba(201,166,106,.42);--serif:Georgia,"Times New Roman",serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--ink);color:#f1e6d0;font-family:var(--serif);line-height:1.55}
+a{color:inherit;text-decoration:none}
+button{font:inherit}
+.site-header{position:sticky;top:0;z-index:20;background:rgba(12,11,10,.96);border-bottom:1px solid var(--line);backdrop-filter:blur(12px)}
+.nav{max-width:1320px;margin:auto;min-height:72px;padding:0 28px;display:flex;align-items:center;gap:30px}
+.brand{display:flex;align-items:center;gap:12px;margin-right:auto;color:var(--gold2);font-size:clamp(1.35rem,2.4vw,2rem);letter-spacing:.13em;text-transform:uppercase;white-space:nowrap}
+.brand-mark{width:36px;height:36px;border:1px solid var(--gold);border-radius:50%;display:grid;place-items:center;color:var(--gold);font-size:1.3rem}
+.nav-links{display:flex;align-items:center;gap:28px;color:#e2d6c0;font-size:.98rem}
+.nav-links a{transition:color .2s}
+.nav-links a:hover{color:var(--gold2)}
+.nav-actions{display:flex;gap:10px}
+.btn{display:inline-flex;justify-content:center;align-items:center;gap:10px;padding:12px 22px;border:1px solid var(--gold);background:rgba(15,13,10,.7);color:var(--gold2);letter-spacing:.04em;cursor:pointer;transition:transform .2s,background .2s,border-color .2s}
+.btn:hover{transform:translateY(-2px);background:#352719;border-color:#f0d49c}
+.btn.primary{background:linear-gradient(135deg,#e3c58a,#a77b3d);color:#21180d;border-color:#f1d9a6;font-weight:bold;box-shadow:inset 0 0 0 2px rgba(57,35,14,.2)}
+.menu-toggle{display:none;background:none;border:1px solid var(--line);color:var(--gold2);padding:8px 12px}
+.hero{min-height:590px;display:flex;align-items:center;position:relative;overflow:hidden;background:
+ linear-gradient(90deg,rgba(8,8,7,.08) 0%,rgba(8,8,7,.22) 42%,rgba(8,8,7,.84) 100%),
+ linear-gradient(0deg,rgba(9,8,7,.75),transparent 35%),
+ url("assets/hero-kingdom.jpg") left center/cover no-repeat,#27231b}
+.hero:after{content:"";position:absolute;inset:12px;border:1px solid rgba(215,181,119,.42);pointer-events:none}
+.hero-content{position:relative;z-index:1;width:min(590px,48%);margin-left:auto;margin-right:max(5vw,calc((100vw - 1320px)/2));padding:70px 20px 80px;text-align:center}
+.eyebrow{color:var(--gold);text-transform:uppercase;letter-spacing:.23em;font-size:.78rem}
+.hero h1{font-size:clamp(3rem,6vw,5.7rem);line-height:.98;letter-spacing:.07em;text-transform:uppercase;color:var(--gold2);font-weight:500;margin:18px 0 8px;text-shadow:0 4px 22px #000}
+.hero h2{font-size:clamp(1.35rem,2.3vw,2rem);font-style:italic;font-weight:400;margin:18px 0 12px}
+.hero p{max-width:540px;margin:0 auto 28px;color:#e2d9c9;font-size:1.05rem}
+.hero-actions{display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
+.pillars{background:linear-gradient(180deg,#1b1915,#12110f);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.pillar-grid{max-width:1320px;margin:auto;display:grid;grid-template-columns:repeat(4,1fr);padding:28px}
+.pillar{padding:10px 24px;display:flex;gap:16px;align-items:flex-start;border-right:1px solid var(--line)}
+.pillar:last-child{border:0}
+.pillar-icon{font-size:2rem;color:var(--gold);line-height:1}
+.pillar h3{margin:0 0 5px;color:var(--gold2);font-size:1.08rem;letter-spacing:.06em;text-transform:uppercase}
+.pillar p{margin:0;color:var(--muted);font-size:.91rem}
+.section{padding:76px 28px}
+.section-inner{max-width:1320px;margin:auto}
+.section-heading{text-align:center;margin:0 auto 34px}
+.section-heading .eyebrow{margin-bottom:8px}
+.section-heading h2{font-size:clamp(2rem,4vw,3rem);font-weight:400;margin:0;color:var(--gold2)}
+.section-heading p{color:#bdb19b;margin:8px auto 0;max-width:650px}
+.world{background:linear-gradient(180deg,#dfcfac,#cbb58d);color:#211b13}
+.world .section-heading h2{color:#302316}
+.world .section-heading p{color:#574832}
+.region-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.region{height:245px;position:relative;overflow:hidden;border:1px solid #85663c;box-shadow:0 8px 20px #49361e35;cursor:pointer;background:#342d21}
+.region img{width:100%;height:100%;object-fit:cover;transition:transform .45s;display:block}
+.region:hover img{transform:scale(1.07)}
+.region:after{content:"";position:absolute;inset:35% 0 0;background:linear-gradient(transparent,rgba(12,10,8,.88))}
+.region-copy{position:absolute;z-index:1;bottom:17px;left:12px;right:12px;text-align:center;color:#fff}
+.region-copy h3{margin:0;font-size:1.55rem;font-weight:400;text-shadow:0 2px 6px #000}
+.region-copy p{margin:2px 0 0;font-size:.9rem;color:#e9dcc4}
+.life{background:radial-gradient(ellipse at 50% 0,#28231b,#11100e 65%)}
+.life-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:42px;align-items:center}
+.life-art{min-height:410px;background:linear-gradient(0deg,rgba(10,9,7,.4),transparent),url("assets/market.jpg") center/cover;border:1px solid var(--line);position:relative}
+.life-art:after{content:"";position:absolute;inset:12px;border:1px solid rgba(225,190,125,.5)}
+.life-copy h2{font-size:clamp(2rem,4vw,3.2rem);font-weight:400;color:var(--gold2);line-height:1.1;margin:0 0 14px}
+.life-copy>p{color:#c4b79f;font-size:1.05rem}
+.life-list{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:26px}
+.life-item{border-top:1px solid var(--line);padding-top:12px}
+.life-item strong{display:block;color:var(--gold2);font-size:1.05rem;font-weight:400}
+.life-item span{color:var(--muted);font-size:.9rem}
+.news-community{background:#171511;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.news-grid{display:grid;grid-template-columns:1.3fr .7fr;gap:30px}
+.panel{border:1px solid var(--line);padding:26px;background:rgba(0,0,0,.18)}
+.panel h2{font-size:1.8rem;font-weight:400;color:var(--gold2);margin:0 0 18px}
+.news-item{display:grid;grid-template-columns:92px 1fr auto;gap:16px;align-items:center;padding:15px 0;border-top:1px solid rgba(201,166,106,.2)}
+.news-thumb{height:68px;background:linear-gradient(135deg,#5d4a2d,#1d2b2a);display:grid;place-items:center;color:var(--gold2);font-size:1.5rem;border:1px solid var(--line)}
+.news-item h3{font-size:1.05rem;font-weight:400;color:#eee0c5;margin:0 0 3px}
+.news-item p{font-size:.88rem;color:var(--muted);margin:0}
+.news-date{color:#a9946c;font-size:.78rem;white-space:nowrap}
+.community-stat{display:flex;justify-content:space-between;border-bottom:1px solid rgba(201,166,106,.2);padding:12px 0;color:#d5c7ac}
+.community-stat strong{color:var(--gold2);font-weight:400}
+.community-note{color:var(--muted);font-size:.92rem;margin:16px 0 22px}
+.join{width:100%}
+.cta{padding:78px 28px;background:linear-gradient(90deg,rgba(13,11,8,.92),rgba(13,11,8,.72)),url("assets/hero-kingdom.jpg") center 58%/cover}
+.cta-inner{max-width:1000px;margin:auto;text-align:center}
+.cta h2{font-size:clamp(2.3rem,5vw,4rem);font-weight:400;color:var(--gold2);margin:0 0 10px}
+.cta p{color:#d1c3a8;max-width:620px;margin:0 auto 26px;font-size:1.05rem}
+.cta small{display:block;color:#b8a98e;margin-top:14px}
+footer{padding:28px;background:#0b0a09;border-top:1px solid var(--line);color:#8f826b}
+.footer-inner{max-width:1320px;margin:auto;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.footer-brand{color:var(--gold2);letter-spacing:.16em}
+.toast{position:fixed;bottom:22px;left:50%;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:#e0c38b;color:#1c160e;padding:12px 20px;border:1px solid #fff0c7;box-shadow:0 8px 28px #0008;z-index:50;transition:.25s}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:900px){
+ .nav{min-height:64px}.menu-toggle{display:block}.nav-links{display:none;position:absolute;top:64px;left:0;right:0;background:#100f0d;padding:20px 28px;flex-direction:column;align-items:flex-start;border-bottom:1px solid var(--line)}
+ .nav-links.open{display:flex}.nav-actions .btn:first-child{display:none}
+ .hero{min-height:620px;background-position:35% center}.hero-content{width:100%;margin:0;padding:90px 28px 65px;background:linear-gradient(90deg,rgba(9,8,7,.58),rgba(9,8,7,.76))}
+ .pillar-grid{grid-template-columns:1fr 1fr}.pillar:nth-child(2){border-right:0}.pillar:nth-child(-n+2){border-bottom:1px solid var(--line);padding-bottom:20px}.pillar:nth-child(n+3){padding-top:20px}
+ .region-grid{grid-template-columns:1fr 1fr}.news-grid{grid-template-columns:1fr}
+}
+@media(max-width:560px){
+ .nav{padding:0 16px;gap:12px}.brand{font-size:1.12rem;letter-spacing:.08em}.brand-mark{width:30px;height:30px}
+ .nav-actions .btn{padding:9px 12px;font-size:.84rem}
+ .hero{min-height:570px}.hero h1{font-size:2.9rem}.hero-actions .btn{width:100%}
+ .pillar-grid{grid-template-columns:1fr;padding:16px}.pillar{border-right:0!important;border-bottom:1px solid var(--line)!important;padding:16px 8px!important}.pillar:last-child{border-bottom:0!important}
+ .section{padding:55px 18px}.region-grid{grid-template-columns:1fr}.region{height:220px}
+ .life-grid{grid-template-columns:1fr;gap:24px}.life-art{min-height:250px}.life-list{grid-template-columns:1fr}
+ .panel{padding:18px}.news-item{grid-template-columns:68px 1fr}.news-thumb{height:58px}.news-date{grid-column:2}
+ .cta{padding:60px 20px}.footer-inner{flex-direction:column;text-align:center}
+}
+</style>
+</head>
+<body>
+<header class="site-header">
+ <nav class="nav" aria-label="Main navigation">
+  <a class="brand" href="#home"><span class="brand-mark">✥</span> Arethtera</a>
+  <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+  <div class="nav-links" id="navLinks">
+   <a href="#world">The World</a><a href="#gameplay">Gameplay</a><a href="#news">News</a><a href="#community">Community</a>
+  </div>
+  <div class="nav-actions"><a class="btn" href="#journey">Log In</a><a class="btn primary" href="#journey">Play Now</a></div>
+ </nav>
+</header>
 
-                        // 2. Fetch the clean JSON data natively from NodeBB
-                        fetch(`${FORUM_URL}/api/category/${CATEGORY_ID}`)
-                            .then(response => response.json())
-                            .then(data => {
-                            // NodeBB returns topics in an array called 'topics'
-                            const topics = data.topics.slice(0, POSTS_COUNT);
-                            let html = '';
+<main>
+<section class="hero" id="home">
+ <div class="hero-content">
+  <div class="eyebrow">A high fantasy medieval life simulator</div>
+  <h1>Arethtera</h1>
+  <div class="eyebrow">A realm of possibility</div>
+  <h2>A World to Live. A Legacy to Build.</h2>
+  <p>Live a full medieval life in a persistent world of kingdoms, trade, craft, ambition, and adventure — all from your browser.</p>
+  <div class="hero-actions">
+   <a class="btn primary" href="#journey">♜ &nbsp; Enter the Kingdom</a>
+   <a class="btn" href="#world">✧ &nbsp; Discover the World</a>
+  </div>
+ </div>
+</section>
 
-                            if (topics.length === 0) {
-                                document.getElementById('nodebb-recent-posts').innerHTML = 'No recent posts found.';
-                                return;
-                            }
+<section class="pillars" id="gameplay" aria-label="Gameplay pillars">
+ <div class="pillar-grid">
+  <article class="pillar"><div class="pillar-icon">⚒</div><div><h3>Build Your Life</h3><p>Become a farmer, merchant, blacksmith, noble, or adventurer.</p></div></article>
+  <article class="pillar"><div class="pillar-icon">♧</div><div><h3>Forge Your Destiny</h3><p>Develop skills, master professions, build relationships, and pursue your ambitions.</p></div></article>
+  <article class="pillar"><div class="pillar-icon">❧</div><div><h3>Live in a Living World</h3><p>Experience seasons, changing economies, social interactions, and dynamic events.</p></div></article>
+  <article class="pillar"><div class="pillar-icon">♛</div><div><h3>Shape Your Legacy</h3><p>Acquire property, establish businesses, build a family, and influence kingdoms.</p></div></article>
+ </div>
+</section>
 
-                            // 3. Loop through and build your clean HTML structure
-                            topics.forEach(topic => {
-                                const topicLink = `${FORUM_URL}/topic/${topic.slug}`;
-                                const authorName = topic.user ? topic.user.username : 'Anonymous';
-                                
-                                html += `
-                                <div style="margin-bottom: 16px; padding-bottom: 12px; border-bottom: 0px solid #eaeaea; font-family: sans-serif;">
-                                    <h4 style="margin: 0 0 4px 0;">
-                                    <a href="${topicLink}" target="_blank" style="color: #0066cc; text-decoration: none; font-size: 1.1em;">
-                                        ${topic.title}
-                                    </a>
-                                    </h4>
-                                    <div style="font-size: 0.85em; color: #666;">
-                                    <span>By <strong>${authorName}</strong></span> • 
-                                    <span>Replies: ${topic.postcount - 1}</span> • 
-                                    <span>Views: ${topic.viewcount}</span>
-                                    </div>
-                                </div>
-                                `;
-                            });
+<section class="section world" id="world">
+ <div class="section-inner">
+  <div class="section-heading"><div class="eyebrow">Beyond the city walls</div><h2>Explore the Realm of Arethtera</h2><p>A diverse realm of kingdoms, peoples, and lands — each with its own opportunities and challenges.</p></div>
+  <div class="region-grid">
+   <a class="region" href="#journey"><img src="assets/thalorien.jpg" alt="Castle city among mountains"><div class="region-copy"><h3>Thalorien</h3><p>The Royal Capital</p></div></a>
+   <a class="region" href="#journey"><img src="assets/valewood.jpg" alt="Green farmland and village"><div class="region-copy"><h3>Valewood</h3><p>Fertile Lands &amp; Village Life</p></div></a>
+   <a class="region" href="#journey"><img src="assets/kargrim.jpg" alt="Mountain settlement"><div class="region-copy"><h3>Kargrim</h3><p>The Mountain Holds</p></div></a>
+   <a class="region" href="#journey"><img src="assets/elenwynn.jpg" alt="Ancient woodland realm"><div class="region-copy"><h3>Elenwynn</h3><p>The Woodland Realms</p></div></a>
+  </div>
+ </div>
+</section>
 
-                            document.getElementById('nodebb-recent-posts').innerHTML = html;
-                            })
-                            .catch(error => {
-                            console.error('Error fetching NodeBB data:', error);
-                            document.getElementById('nodebb-recent-posts').innerHTML = 'Unable to load forum posts at this time.';
-                            });
-                        </script>
-                </section>
-            </div>
-        </section>
-    </body>
-    <footer>
-        <div class="footer-columns">
-            <div>
-                <ul>
-                    <b>COMMUNITY</b><br>
-                    <a href="https://forum.arethtera.com">News</a><br>
-                    <a href="https://forum.arethtera.com">Forum</a><br>
-                </ul>
-            </div>
-            <div>
-                <ul>
-                    <b>TEAM</b><br>               
-                    <a href="contact.html">Contact</a><br>
-                    <a href="history.html">History</a><br>
-                </ul>
-            </div>
-            <div>
-                <ul>
-                    <b>HELP & SUPPORT</b><br>
-                    <a href="https://wiki.arethtera.com">Wiki</a><br>
-                    <a href="help.html">Help</a><br>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-copyright">
-            &copy; 2026 Arethtera Studios. All rights reserved.
-        </div>
-    </footer>  
+<section class="section life">
+ <div class="section-inner life-grid">
+  <div class="life-art" role="img" aria-label="A medieval market street"></div>
+  <div class="life-copy">
+   <div class="eyebrow">More than an adventure</div>
+   <h2>Choose How Your Story Unfolds</h2>
+   <p>There is no single path through Arethtera. Earn your keep, master a craft, find your place in a community, or rise through the ranks. Your choices shape the life you lead.</p>
+   <div class="life-list">
+    <div class="life-item"><strong>Trade &amp; Prosper</strong><span>Buy, sell, travel, and build a livelihood.</span></div>
+    <div class="life-item"><strong>Craft &amp; Create</strong><span>Gather resources and master practical skills.</span></div>
+    <div class="life-item"><strong>Home &amp; Kin</strong><span>Make a home and form lasting bonds.</span></div>
+    <div class="life-item"><strong>Honor &amp; Influence</strong><span>Earn standing and leave your mark.</span></div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<section class="section news-community" id="news">
+ <div class="section-inner news-grid">
+  <div class="panel">
+   <h2>Realm News</h2>
+   <article class="news-item"><div class="news-thumb">❄</div><div><h3>Seasonal stories await</h3><p>Follow realm announcements, world events, and new chapters.</p></div><span class="news-date">Coming soon</span></article>
+   <article class="news-item"><div class="news-thumb">⚒</div><div><h3>Professions &amp; trades</h3><p>Discover the crafts and livelihoods that make the realm thrive.</p></div><span class="news-date">Coming soon</span></article>
+   <article class="news-item"><div class="news-thumb">⌂</div><div><h3>A place to call home</h3><p>Prepare to make your mark on the towns and lands of Arethtera.</p></div><span class="news-date">Coming soon</span></article>
+  </div>
+  <aside class="panel" id="community">
+   <h2>The Community</h2>
+   <p class="community-note">A living realm is shaped by the people who inhabit it. Meet fellow settlers, traders, artisans, and adventurers.</p>
+   <div class="community-stat"><span>World</span><strong>Persistent realm</strong></div>
+   <div class="community-stat"><span>Platform</span><strong>Browser based</strong></div>
+   <div class="community-stat"><span>Access</span><strong>No download required</strong></div>
+   <a class="btn join" href="#journey">Join the Community</a>
+  </aside>
+ </div>
+</section>
+
+<section class="cta" id="journey">
+ <div class="cta-inner">
+  <div class="eyebrow">Your story begins here</div>
+  <h2>What Will You Become?</h2>
+  <p>Choose your path, create your character, and step into a world where a quiet life can become an extraordinary legacy.</p>
+  <button class="btn primary" id="playButton">♜ &nbsp; Play Arethtera</button>
+  <small>Browser based &nbsp; • &nbsp; No download required</small>
+ </div>
+</section>
+</main>
+
+<footer><div class="footer-inner"><span class="footer-brand">✥ ARETHTERA</span><span>A World to Live. A Legacy to Build.</span><span>© <span id="year"></span> Arethtera. All rights reserved.</span></div></footer>
+<div class="toast" id="toast" role="status" aria-live="polite">The gates are not open just yet. Stay tuned for the realm's launch.</div>
+
+<script>
+const menuToggle=document.getElementById('menuToggle');
+const navLinks=document.getElementById('navLinks');
+menuToggle.addEventListener('click',()=>{
+ const open=navLinks.classList.toggle('open');
+ menuToggle.setAttribute('aria-expanded',String(open));
+});
+navLinks.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>{
+ navLinks.classList.remove('open');menuToggle.setAttribute('aria-expanded','false');
+}));
+document.getElementById('year').textContent=new Date().getFullYear();
+const toast=document.getElementById('toast');
+let toastTimer;
+function showToast(message){
+ toast.textContent=message;toast.classList.add('show');
+ clearTimeout(toastTimer);toastTimer=setTimeout(()=>toast.classList.remove('show'),3600);
+}
+document.getElementById('playButton').addEventListener('click',()=>showToast("The gates are not open just yet. Stay tuned for the realm's launch."));
+document.querySelectorAll('a[href="#journey"]').forEach(a=>a.addEventListener('click',()=>{
+ // The CTA remains a launch placeholder until account and game services are connected.
+}));
+</script>
+</body>
 </html>
