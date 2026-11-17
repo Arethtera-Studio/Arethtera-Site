@@ -25,7 +25,7 @@ document.getElementById('playButton').addEventListener('click', async () => {
 
     try {
         const response = await fetch(
-            `${PLAY_FORUM_URL}/api/user/arethtera`,
+            `${PLAY_FORUM_URL}/api/me`,
             { credentials: "include" }
         );
 
