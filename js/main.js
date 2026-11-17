@@ -38,7 +38,7 @@ document.getElementById('playButton').addEventListener('click', async () => {
         if (data.loggedIn && data.loggedInUser?.uid) {
             window.location.href = PLATFORM_URL;
         } else {
-            window.location.href = `${PLAY_FORUM_URL}/login`;
+            window.location.href = `${PLAY_FORUM_URL}/login?next=${encodeURIComponent("https://arethtera.com/")}`;
         }
     } catch (error) {
         console.error("Login check failed:", error);
