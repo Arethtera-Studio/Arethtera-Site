@@ -42,6 +42,6 @@ document.getElementById('playButton').addEventListener('click', async () => {
         }
     } catch (error) {
         console.error("Login check failed:", error);
-        window.location.href = `${PLAY_FORUM_URL}/login`;
+        window.location.href = `${PLAY_FORUM_URL}/login?next=${encodeURIComponent("https://arethtera.com/")}`;
     }
 });
