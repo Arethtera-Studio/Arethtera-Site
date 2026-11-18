@@ -58,6 +58,8 @@ async function checkAccount() {
 }
 
 async function logoutAccount(event) {
+    console.log("LOGOUT BUTTON CLICKED");
+    
     event.preventDefault();
 
     const logoutButton = document.getElementById("accountLogout");
