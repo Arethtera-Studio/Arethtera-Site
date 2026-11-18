@@ -3,9 +3,11 @@ console.log("Arethtera account.js loaded!");
 
 const ACCOUNT_FORUM_URL = "https://forum.arethtera.com";
 const ACCOUNT_HOME_URL = "https://arethtera.com/";
+const PLATFORM_URL = "https://arethtera.com/platform/";
 
 async function checkAccount() {
     const accountArea = document.getElementById("accountArea");
+
     console.log("Account area found:", accountArea);
 
     if (!accountArea) return;
@@ -13,7 +15,9 @@ async function checkAccount() {
     try {
         const response = await fetch(
             `${ACCOUNT_FORUM_URL}/api/user/arethtera`,
-            { credentials: "include" }
+            {
+                credentials: "include"
+            }
         );
 
         if (!response.ok) {
@@ -30,7 +34,7 @@ async function checkAccount() {
                     Welcome, ${escapeAccountHTML(user.username)}!
                 </span>
 
-                <a href="${ACCOUNT_HOME_URL}platform/">
+                <a href="${PLATFORM_URL}">
                     My Account
                 </a>
 
@@ -39,7 +43,8 @@ async function checkAccount() {
                 </a>
             `;
 
-            document.getElementById("accountLogout")
+            document
+                .getElementById("accountLogout")
                 .addEventListener("click", logoutAccount);
 
         } else {
@@ -63,28 +68,61 @@ async function logoutAccount(event) {
     }
 
     try {
-        const response = await fetch(
-            `${ACCOUNT_FORUM_URL}/api/v3/users/logout`,
+        // Retrieve NodeBB's CSRF token
+        const pageResponse = await fetch(
+            `${ACCOUNT_FORUM_URL}/`,
+            {
+                credentials: "include"
+            }
+        );
+
+        if (!pageResponse.ok) {
+            throw new Error("Unable to retrieve NodeBB page");
+        }
+
+        const pageHTML = await pageResponse.text();
+
+        const csrfMatch = pageHTML.match(
+            /"csrf_token"\s*:\s*"([^"]+)"/
+        );
+
+        if (!csrfMatch) {
+            throw new Error("NodeBB CSRF token not found");
+        }
+
+        const csrfToken = csrfMatch[1];
+
+        // Submit NodeBB logout request
+        const logoutResponse = await fetch(
+            `${ACCOUNT_FORUM_URL}/logout`,
             {
                 method: "POST",
                 credentials: "include",
                 headers: {
-                    "Content-Type": "application/json"
+                    "X-Csrf-Token": csrfToken,
+                    "X-Requested-With": "XMLHttpRequest"
                 }
             }
         );
 
-        if (!response.ok) {
+        if (!logoutResponse.ok) {
             throw new Error("Forum logout failed");
         }
 
+        // Return to Arethtera landing page
         window.location.replace(ACCOUNT_HOME_URL);
 
     } catch (error) {
         console.error("Logout error:", error);
 
-        window.location.href =
-            `${ACCOUNT_FORUM_URL}/logout?loggedOut=1`;
+        if (logoutButton) {
+            logoutButton.textContent = "Log Out";
+            logoutButton.style.pointerEvents = "auto";
+        }
+
+        alert(
+            "Logout failed. Please try logging out through the forum."
+        );
     }
 }
 
