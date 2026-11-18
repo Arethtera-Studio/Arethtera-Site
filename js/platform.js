@@ -36,11 +36,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.querySelectorAll(".side-link").forEach(link => {
     link.addEventListener("click", (event) => {
-      if (link.id === "platformLogout") {
-        event.preventDefault();
-        logoutFromArethtera();
-        return;
-      }
+    if (link.id === "platformLogout") {
+      event.preventDefault();
+
+      console.log("PLATFORM LOGOUT CLICKED");
+
+      alert("Logout button detected. Starting logout...");
+
+      logoutFromArethtera();
+      return;
+    }
 
       document.querySelectorAll(".side-link").forEach(item => item.classList.remove("active"));
       link.classList.add("active");
