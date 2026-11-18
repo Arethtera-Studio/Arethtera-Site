@@ -149,8 +149,8 @@ async function logoutAccount(event) {
 
 function showLoggedOut(container) {
     container.innerHTML = `
-        <a href="${ACCOUNT_FORUM_URL}/login">Log In</a>
-        <a href="${ACCOUNT_FORUM_URL}/register">Create Account</a>
+        <a href="${ACCOUNT_FORUM_URL}/login?redirect=${returnURL}">Log In</a>
+        <a href="${ACCOUNT_FORUM_URL}/register?redirect=${returnUrl}">Create Account</a>
     `;
 }
 
