@@ -68,7 +68,7 @@ async function logoutAccount(event) {
     }
 
     try {
-        // Retrieve NodeBB's CSRF token
+        // Retrieve NodeBB homepage and CSRF token
         const pageResponse = await fetch(
             `${ACCOUNT_FORUM_URL}/`,
             {
@@ -77,11 +77,12 @@ async function logoutAccount(event) {
         );
 
         if (!pageResponse.ok) {
-            throw new Error("Unable to retrieve NodeBB page");
+            throw new Error("Unable to retrieve NodeBB homepage");
         }
 
         const pageHTML = await pageResponse.text();
 
+        // Find NodeBB CSRF token
         const csrfMatch = pageHTML.match(
             /"csrf_token"\s*:\s*"([^"]+)"/
         );
@@ -92,7 +93,9 @@ async function logoutAccount(event) {
 
         const csrfToken = csrfMatch[1];
 
-        // Submit NodeBB logout request
+        console.log("NodeBB CSRF token retrieved.");
+
+        // Submit the verified NodeBB logout route
         const logoutResponse = await fetch(
             `${ACCOUNT_FORUM_URL}/logout`,
             {
@@ -106,10 +109,26 @@ async function logoutAccount(event) {
         );
 
         if (!logoutResponse.ok) {
-            throw new Error("Forum logout failed");
+            throw new Error(
+                `NodeBB logout failed: ${logoutResponse.status}`
+            );
         }
 
-        // Return to Arethtera landing page
+        // Verify the forum session is actually logged out
+        const verifyResponse = await fetch(
+            `${ACCOUNT_FORUM_URL}/api/user/arethtera`,
+            {
+                credentials: "include"
+            }
+        );
+
+        const verifyData = await verifyResponse.json();
+
+        if (verifyData.loggedIn) {
+            throw new Error("Forum session is still active");
+        }
+
+        // Return to the landing page
         window.location.replace(ACCOUNT_HOME_URL);
 
     } catch (error) {
@@ -121,7 +140,7 @@ async function logoutAccount(event) {
         }
 
         alert(
-            "Logout failed. Please try logging out through the forum."
+            "Logout could not be completed. Please check the browser console."
         );
     }
 }
