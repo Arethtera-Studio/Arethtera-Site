@@ -1,6 +1,5 @@
 console.log("Arethtera account.js loaded!");
 const ACCOUNT_FORUM_URL = "https://forum.arethtera.com";
-const PLATFORM_URL = "https://.arethtera.com/platform/";
 
 async function checkAccount() {
     const accountArea = document.getElementById("accountArea");
