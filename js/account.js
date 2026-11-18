@@ -3,7 +3,7 @@ console.log("Arethtera account.js loaded!");
 
 const ACCOUNT_FORUM_URL = "https://forum.arethtera.com";
 const ACCOUNT_HOME_URL = "https://arethtera.com/";
-const PLATFORM_URL = "https://arethtera.com/platform/";
+const ACCOUNT_PLATFORM_URL = "https://arethtera.com/platform/";
 
 async function checkAccount() {
     const accountArea = document.getElementById("accountArea");
@@ -34,7 +34,7 @@ async function checkAccount() {
                     Welcome, ${escapeAccountHTML(user.username)}!
                 </span>
 
-                <a href="${PLATFORM_URL}">
+                <a href="${ACCOUNT_PLATFORM_URL}">
                     My Account
                 </a>
 
