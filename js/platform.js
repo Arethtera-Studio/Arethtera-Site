@@ -3,75 +3,91 @@ const FORUM_BASE_URL = "https://forum.arethtera.com";
 const LANDING_PAGE_URL = "https://arethtera.com/";
 
 document.addEventListener("DOMContentLoaded", () => {
-  document.getElementById("year").textContent = new Date().getFullYear();
+  const year = document.getElementById("year");
+  if (year) {
+    year.textContent = new Date().getFullYear();
+  }
 
-  // Load the signed-in NodeBB profile
   loadPlayerProfile();
 
-  // Profile dropdown
+  // Profile button
   const profileButton = document.getElementById("profileButton");
-  const profileMenu = document.getElementById("profileMenu");
 
-  profileButton.addEventListener("click", () => {
-    const isOpen = profileButton.getAttribute("aria-expanded") === "true";
-    profileButton.setAttribute("aria-expanded", String(!isOpen));
-    profileMenu.hidden = isOpen;
-  });
+  if (profileButton) {
+    profileButton.addEventListener("click", () => {
+      console.log("Profile button clicked.");
+    });
+  }
 
-  document.addEventListener("click", (event) => {
-    if (!event.target.closest(".profile-wrap")) {
-      profileMenu.hidden = true;
-      profileButton.setAttribute("aria-expanded", "false");
-    }
-  });
-
-  // Sidebar navigation
+  // Sidebar
   const sidebar = document.getElementById("sidebar");
   const menuToggle = document.getElementById("mobileMenuToggle");
 
-  menuToggle.addEventListener("click", () => {
-    const isOpen = sidebar.classList.toggle("open");
-    menuToggle.setAttribute("aria-expanded", String(isOpen));
-  });
+  if (sidebar && menuToggle) {
+    menuToggle.addEventListener("click", () => {
+      const isOpen = sidebar.classList.toggle("open");
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
+    });
+  }
 
+  // Sidebar links and logout
   document.querySelectorAll(".side-link").forEach(link => {
-    link.addEventListener("click", (event) => {
-    if (link.id === "platformLogout") {
-      event.preventDefault();
+    link.addEventListener("click", event => {
 
-      console.log("PLATFORM LOGOUT CLICKED");
+      if (link.id === "platformLogout") {
+        event.preventDefault();
+        console.log("PLATFORM LOGOUT CLICKED");
+        logoutFromArethtera();
+        return;
+      }
 
-      alert("Logout button detected. Starting logout...");
+      document.querySelectorAll(".side-link").forEach(item => {
+        item.classList.remove("active");
+      });
 
-      logoutFromArethtera();
-      return;
-    }
-
-      document.querySelectorAll(".side-link").forEach(item => item.classList.remove("active"));
       link.classList.add("active");
-      sidebar.classList.remove("open");
-      menuToggle.setAttribute("aria-expanded", "false");
+
+      if (sidebar) {
+        sidebar.classList.remove("open");
+      }
+
+      if (menuToggle) {
+        menuToggle.setAttribute("aria-expanded", "false");
+      }
     });
   });
 
   // Game modal
   const modal = document.getElementById("gameModal");
-  const closeModal = () => { modal.hidden = true; };
 
-  document.getElementById("launchButton").addEventListener("click", () => {
-    modal.hidden = false;
-  });
+  const closeModal = () => {
+    if (modal) modal.hidden = true;
+  };
 
-  document.getElementById("launchInfo").addEventListener("click", () => {
-    modal.hidden = false;
-  });
+  const launchButton = document.getElementById("launchButton");
 
-  document.getElementById("modalClose").addEventListener("click", closeModal);
-  document.getElementById("modalOkay").addEventListener("click", closeModal);
+  if (launchButton && modal) {
+    launchButton.addEventListener("click", () => {
+      modal.hidden = false;
+    });
+  }
 
-  modal.addEventListener("click", event => {
-    if (event.target === modal) closeModal();
-  });
+  const closeButton = document.getElementById("modalClose");
+  const okayButton = document.getElementById("modalOkay");
+
+  if (closeButton) {
+    closeButton.addEventListener("click", closeModal);
+  }
+
+  if (okayButton) {
+    okayButton.addEventListener("click", closeModal);
+  }
+
+  if (modal) {
+    modal.addEventListener("click", event => {
+      if (event.target === modal) closeModal();
+    });
+  }
 
   document.addEventListener("keydown", event => {
     if (event.key === "Escape") closeModal();
@@ -81,10 +97,13 @@ document.addEventListener("DOMContentLoaded", () => {
 async function loadPlayerProfile() {
   const nameTarget = document.getElementById("playerName");
 
+  if (!nameTarget) return;
+
   try {
-    const response = await fetch(`${FORUM_BASE_URL}/api/user/arethtera`, {
-      credentials: "include"
-    });
+    const response = await fetch(
+      `${FORUM_BASE_URL}/api/user/arethtera`,
+      { credentials: "include" }
+    );
 
     if (!response.ok) {
       throw new Error(`Forum API returned ${response.status}`);
@@ -104,28 +123,28 @@ async function loadPlayerProfile() {
   }
 }
 
-// Shared platform logout handler
 async function logoutFromArethtera() {
+  console.log("Starting Arethtera logout.");
+
   try {
-    // Retrieve the NodeBB homepage
+    // Retrieve NodeBB homepage
     const pageResponse = await fetch(`${FORUM_BASE_URL}/`, {
       credentials: "include"
     });
 
     if (!pageResponse.ok) {
-      throw new Error("Could not contact NodeBB");
+      throw new Error("Could not contact NodeBB.");
     }
 
     const html = await pageResponse.text();
 
-    // Find NodeBB CSRF token
     const match = html.match(/"csrf_token"\s*:\s*"([^"]+)"/);
 
     if (!match) {
-      throw new Error("NodeBB CSRF token was not found");
+      throw new Error("NodeBB CSRF token was not found.");
     }
 
-    // Send NodeBB logout POST request
+    // Submit NodeBB logout POST request
     const logoutResponse = await fetch(`${FORUM_BASE_URL}/logout`, {
       method: "POST",
       credentials: "include",
@@ -139,11 +158,24 @@ async function logoutFromArethtera() {
       throw new Error(`NodeBB logout failed: ${logoutResponse.status}`);
     }
 
-    // Return to landing page
+    console.log("NodeBB logout request completed.");
+
+    // Verify session termination
+    const verifyResponse = await fetch(
+      `${FORUM_BASE_URL}/api/user/arethtera`,
+      { credentials: "include" }
+    );
+
+    const verifyData = await verifyResponse.json();
+
+    if (verifyData.loggedIn) {
+      throw new Error("NodeBB session is still active.");
+    }
+
     window.location.replace(LANDING_PAGE_URL);
 
   } catch (error) {
-    console.error("Platform logout failed:", error);
-    alert("Unable to log out. Please try again.");
+    console.error("Arethtera logout failed:", error);
+    alert("Logout failed. Please check the browser console.");
   }
 }
