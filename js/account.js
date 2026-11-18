@@ -27,7 +27,7 @@ async function checkAccount() {
                 </span>
 
                 <a href="${PLATFORM_URL}">
-                    My Account
+                    Change
                 </a>
 
                 <a href="${ACCOUNT_FORUM_URL}/logout">
