@@ -26,7 +26,7 @@ async function checkAccount() {
                     Welcome, ${escapeAccountHTML(user.username)}!
                 </span>
 
-                <a href="${PLATFORM_URL}${encodeURIComponent(user.userslug)}">
+                <a href="${ACCOUNT_FORUM_URL}/user/${encodeURIComponent(user.userslug)}">
                     My Account
                 </a>
 
