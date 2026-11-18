@@ -25,7 +25,7 @@ async function checkAccount() {
                     Welcome, ${escapeAccountHTML(user.username)}!
                 </span>
 
-                <a href="${ACCOUNT_FORUM_URL}/user/${encodeURIComponent(user.userslug)}">
+                <a href="https://arethtera.com/platform/">
                     My Account
                 </a>
 
