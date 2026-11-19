@@ -194,12 +194,27 @@
   </div>
 
   <div class="modal-backdrop" id="gameModal" hidden>
-    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-      <button class="modal-close" id="modalClose" aria-label="Close">×</button>
-      <span class="modal-emblem">✥</span>
-      <h2 id="modalTitle">The realm awaits</h2>
-      <p>The game client is not connected yet. This dashboard is the foundation of your Arethtera game platform.</p>
-      <button class="gold-button" id="modalOkay">Understood</button>
+    <div class="game-client-container"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Arethtera Game Interface">
+
+      <button
+        class="game-client-close"
+        id="modalClose"
+        type="button"
+        aria-label="Close game">
+        ×
+      </button>
+
+      <iframe
+        id="gameFrame"
+        src="about:blank"
+        title="Arethtera Game Interface"
+        allow="fullscreen"
+        allowfullscreen>
+      </iframe>
+
     </div>
   </div>
 </body>

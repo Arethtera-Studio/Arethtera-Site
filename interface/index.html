@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Arethtera — Interface Prototype</title>
+<style>
+:root{--bg:#1c2631;--panel:#293542;--gold:#d5b77b;--paper:#d8c49d;--ink:#493a29;--muted:#aeb8c3}
+*{box-sizing:border-box}body{margin:0;background:#111820;color:#eee;font-family:Georgia,serif}button{font:inherit;cursor:pointer}
+.app{height:100vh;min-height:600px;display:flex;flex-direction:column;overflow:hidden}
+header{background:linear-gradient(120deg,#202a35,#303d49);padding:12px 18px;border-bottom:1px solid #53606c;z-index:2}
+.brandrow,.row,.bottom,.navtop,.toolbar,.panelhead{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{font-size:22px;letter-spacing:3px;color:#ead7ad}.brand small{font:10px Arial;color:#aeb8c3;letter-spacing:2px}
+.active{font:11px Arial;color:#b9dfc2;border:1px solid #54735d;background:#294536;border-radius:20px;padding:5px 10px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);margin-top:12px}.stats.bottom{grid-template-columns:repeat(3,1fr);border-top:1px solid #ffffff20;padding-top:9px;margin-top:9px}
+.stat{padding:2px 13px;border-right:1px solid #ffffff20;min-width:0}.stat:first-child{padding-left:0}.stat:last-child{border:0}
+.label{font:10px Arial;letter-spacing:1px;color:#aeb8c3;text-transform:uppercase;margin-bottom:5px}.value{font-size:14px;color:#f2e7d2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.meter{height:5px;background:#4a4b45;border-radius:9px;margin-top:6px}.meter i{display:block;height:100%;border-radius:9px}.hp{width:100%;background:#cf6a66}.stam{width:85%;background:#d4ad57}.hun{width:20%;background:#d99c66}
+.layout{display:flex;flex:1;min-height:0}.sidebar{width:195px;flex:0 0 195px;background:linear-gradient(#202a35,#1b242e);padding:9px;display:flex;flex-direction:column;border-right:1px solid #3b4651;transition:.2s}.sidebar.collapsed{width:60px;flex-basis:60px}
+.navtop{height:35px;padding:0 5px 8px;color:var(--gold);font:11px Arial;letter-spacing:1px}.navtop button{background:none;color:#c4ccd3;border:0;font-size:18px}
+nav{display:flex;flex-direction:column;gap:3px}.navbtn{display:flex;align-items:center;gap:12px;width:100%;padding:10px;color:#d0d6dc;background:none;border:0;border-radius:5px;text-align:left;font-size:13px;white-space:nowrap}.navbtn .ico{width:20px;text-align:center;color:#c5ad7c;font:18px Arial}.navbtn:hover{background:#3a4652}.navbtn.selected{background:#465460;color:#f0d9ac;box-shadow:inset 3px 0 var(--gold)}
+.collapsed .navlabel,.collapsed .navtitle{display:none}.collapsed .navbtn{justify-content:center;padding:11px 4px}.exit{margin-top:auto;border-top:1px solid #46515c;padding-top:8px}.exit button{color:#d58b83}
+.main{flex:1;min-width:0;display:flex;flex-direction:column;background:#29343e;position:relative}.toolbar{height:42px;flex:0 0 42px;background:#303b46;padding:0 14px;border-bottom:1px solid #53606c;font:11px Arial;color:#e0e5e9}
+.pill{font:10px Arial;border:1px solid #66816e;color:#b9dfc2;background:#294536;padding:4px 8px;border-radius:20px}.toolbar button,.small{background:#465460;color:#edf0f2;border:1px solid #66737e;border-radius:4px;padding:6px 10px;font-size:11px}
+.scene{position:relative;flex:1;min-height:220px;overflow:hidden;background:linear-gradient(#8b9da4 0%,#c4bba5 42%,#81735d 43%,#574936 100%)}
+.sky{position:absolute;inset:0 0 47%;background:linear-gradient(#8299a2,#c4bba5)}.sun{position:absolute;top:12%;right:18%;width:68px;height:68px;border-radius:50%;background:#e5d3a8;box-shadow:0 0 50px #f4dba477}
+.hill{position:absolute;bottom:43%;width:75%;height:28%;background:#68745d;clip-path:polygon(0 100%,16% 42%,30% 68%,50% 10%,69% 63%,83% 34%,100% 100%)}.hill.r{right:-10%;transform:scaleX(-1);background:#566a57}
+.wall{position:absolute;bottom:39%;width:100%;height:16%;background:#81765e;border-top:7px solid #a99a78}
+.house{position:absolute;bottom:39%;left:5%;width:23%;height:35%;background:linear-gradient(90deg,#5d4634,#9b7953,#634a36);border:4px solid #493a2d}.house:before{content:"";position:absolute;left:-8%;top:-24%;width:116%;height:28%;background:#47372e;clip-path:polygon(0 100%,50% 0,100% 100%)}
+.house.right{left:auto;right:4%;width:25%;height:42%;background:linear-gradient(90deg,#5b4535,#a17e57,#584331)}
+.window{position:absolute;top:34%;left:16%;width:16%;height:24%;background:#d4b77c;border:3px solid #49382b;box-shadow:35px 0 #d4b77c}
+.awning{position:absolute;bottom:39%;left:31%;width:34%;height:19%;background:repeating-linear-gradient(90deg,#a94e3f 0 24px,#e0cba1 24px 48px);clip-path:polygon(0 0,100% 0,92% 100%,8% 100%);border-bottom:5px solid #4c3728}
+.stall{position:absolute;bottom:20%;left:32%;width:32%;height:20%;background:#79583a;border:5px solid #503a29;box-shadow:0 10px 18px #24180f77}.stall:before{content:"";position:absolute;left:-5%;top:-24%;width:110%;height:26%;background:#c2a16b;border:3px solid #5a412e}
+.road{position:absolute;bottom:-22%;left:15%;width:70%;height:70%;background:linear-gradient(90deg,#665b4b,#99866b 50%,#665b4b);clip-path:polygon(40% 0,60% 0,100% 100%,0 100%)}
+.person{position:absolute;bottom:20%;width:27px;height:74px;border-radius:40% 40% 10% 10%;background:#433a31;box-shadow:inset 0 15px #b38a5c}.person:before{content:"";position:absolute;top:-17px;left:5px;width:17px;height:19px;border-radius:50%;background:#b88c68}.p1{left:43%}.p2{right:35%;transform:scale(.72);background:#5b4a64}.p3{left:18%;transform:scale(.6)}
+.vignette{position:absolute;inset:0;box-shadow:inset 0 0 100px #10182066;pointer-events:none}
+.loccard{position:absolute;left:16px;bottom:15px;background:#202833dc;border:1px solid #d5b77b66;border-radius:6px;padding:10px 13px;max-width:340px}.loccard strong{display:block;color:#f0dfbd;margin-bottom:4px}.loccard span{font:11px Arial;color:#c5cdd4}
+.hint{position:absolute;right:15px;bottom:15px;background:#202833d9;padding:9px 12px;border-radius:5px;font:11px Arial}
+.scenefoot,.footer{background:#202a35;padding:9px 14px;display:flex;justify-content:space-between;gap:10px;color:#aeb8c3;font:10px Arial}
+.overlay{position:absolute;inset:0;background:#080c11a8;backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;padding:3vh 3vw;z-index:4}.panel{width:min(76%,1000px);height:min(76%,760px);min-height:340px;background:linear-gradient(135deg,#e0cda8,#cdb88e);color:var(--ink);border:8px solid #493829;outline:2px solid #b99b64;box-shadow:0 20px 70px #000b,inset 0 0 35px #8e714033;display:flex;flex-direction:column;padding:19px;position:relative}.panel:before{content:"";position:absolute;inset:6px;border:1px solid #987b50;pointer-events:none}
+.panelhead{border-bottom:1px solid #9e865d;padding-bottom:12px;position:relative;z-index:1}.ptitle{font-size:23px}.psub{font:11px Arial;color:#786348;margin-top:4px}.close{background:#57432e;color:#f2dfba;padding:7px 12px;border:0;border-radius:3px}
+.panelbody{overflow:auto;padding:14px 5px;position:relative;z-index:1}.card{background:#c4ad7e;border:1px solid #9e865d;padding:13px;margin:7px 0}.card h3{margin:0 0 7px;font-size:15px}.card p{font-size:13px;line-height:1.5;color:#59472f}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.map{position:absolute;inset:0;background:#cdb98f;color:#493a29;z-index:6;padding:18px;display:flex;flex-direction:column}.maphead{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #907951;padding-bottom:12px}.maptitle{font-size:24px}.mapcanvas{position:relative;flex:1;margin:14px 0;background:radial-gradient(ellipse at 48% 45%,#e1d1a9,#c5ad7d 70%,#ad956b);border:3px solid #806847;overflow:hidden;min-height:250px}
+.mapcanvas svg{width:100%;height:100%;position:absolute;inset:0}.place{position:absolute;background:#59432d;color:#f4e5c7;border:1px solid #3f2d1e;padding:7px 10px;border-radius:3px;font-size:12px}.place:hover{background:#80623d}.legend{font:11px Arial;color:#59472f;display:flex;gap:18px;flex-wrap:wrap}
+.toast{position:absolute;top:12px;left:50%;transform:translateX(-50%);z-index:9;background:#202833ed;color:#f1dfbd;border:1px solid var(--gold);padding:10px 16px;border-radius:5px;font:12px Arial;display:none}.toast.show{display:block}
+[hidden]{display:none!important}
+@media(max-width:700px){header{padding:9px}.brand{font-size:17px}.brand small{display:none}.stat{padding:2px 6px}.label{font-size:8px}.value{font-size:11px}.sidebar{width:55px;flex-basis:55px;padding:7px 4px}.sidebar .navlabel,.sidebar .navtitle{display:none}.sidebar .navbtn{justify-content:center;padding:10px 3px}.panel{width:96%;height:88%;padding:13px;border-width:5px}.grid{grid-template-columns:1fr}.hint{display:none}}
+</style>
+</head>
+<body>
+<div class="app">
+<header>
+ <div class="brandrow"><div class="brand">♜ ARETHTERA <small>LIFE SIMULATOR</small></div><span class="active">● WORLD ACTIVE</span></div>
+ <div class="stats">
+  <div class="stat"><div class="label">Character</div><div class="value">Alden</div></div>
+  <div class="stat"><div class="label">♥ HP</div><div class="value">100 / 100</div><div class="meter"><i class="hp"></i></div></div>
+  <div class="stat"><div class="label">ϟ Stamina</div><div class="value">85 / 100</div><div class="meter"><i class="stam"></i></div></div>
+  <div class="stat"><div class="label">Hunger</div><div class="value">20 / 100</div><div class="meter"><i class="hun"></i></div></div>
+ </div>
+ <div class="stats bottom">
+  <div class="stat"><div class="label">⌖ Current Location</div><div class="value" id="locationHeader">Town Market</div></div>
+  <div class="stat"><div class="label">◈ Money</div><div class="value">125 Gold</div></div>
+  <div class="stat"><div class="label">◷ Local Time · Date</div><div class="value" id="clock">10:35 AM · 14th Day of Spring</div></div>
+ </div>
+</header>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+ <div class="navtop"><span class="navtitle">NAVIGATION</span><button id="collapse" title="Collapse navigation">☰</button></div>
+ <nav id="nav"></nav>
+ <div class="exit"><button class="navbtn" data-menu="Exit Game"><span class="ico">⇥</span><span class="navlabel">Exit Game</span></button></div>
+</aside>
+<main class="main">
+ <div class="toolbar"><div><span class="pill">FIRST-PERSON VIEW</span> <span id="sceneLocation">Town Market</span></div><div><button id="interact">◎ Interact · E</button> <button id="mapBtn">⌖ World Map</button></div></div>
+ <section class="scene" aria-label="Illustrative medieval marketplace scene">
+  <div class="sky"></div><div class="sun"></div><div class="hill"></div><div class="hill r"></div><div class="wall"></div>
+  <div class="house"><span class="window"></span></div><div class="house right"><span class="window"></span></div><div class="awning"></div><div class="stall"></div><div class="road"></div>
+  <div class="person p1"></div><div class="person p2"></div><div class="person p3"></div><div class="vignette"></div>
+  <div class="loccard"><strong id="locationTitle">Town Market</strong><span id="locationDescription">Merchants trade beneath colourful awnings as townsfolk move through the square.</span></div>
+  <div class="hint">W A S D · MOVE &nbsp; | &nbsp; MOUSE · LOOK &nbsp; | &nbsp; E · INTERACT</div>
+ </section>
+ <div class="scenefoot"><span id="status">You are standing in the busy town marketplace.</span><span>ARETHTERA · PERSISTENT WORLD · 1:1 TIME</span></div>
+</main>
+</div>
+<div class="footer"><span>ARETHTERA · INTERFACE PROTOTYPE</span><span>World simulation and character data are illustrative</span></div>
+<div class="toast" id="toast"></div>
+<div class="overlay" id="overlay" hidden><section class="panel"><div class="panelhead"><div><div class="ptitle" id="panelTitle"></div><div class="psub">THE RECORDS OF YOUR LIFE IN ARETHTERA</div></div><button class="close" id="closePanel">✕ Close</button></div><div class="panelbody" id="panelBody"></div></section></div>
+<div class="map" id="map" hidden>
+ <div class="maphead"><div><div class="maptitle">✥ World Map</div><div class="psub">Known roads and major settlements · Select a destination to inspect</div></div><button class="close" id="closeMap">✕ Return to World</button></div>
+ <div class="mapcanvas">
+  <svg viewBox="0 0 1000 600" preserveAspectRatio="none"><defs><pattern id="dots" width="28" height="28" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#806b48" opacity=".35"/></pattern></defs><rect width="1000" height="600" fill="url(#dots)"/><path d="M0 450 Q180 370 260 430 T500 400 T760 430 T1000 350" fill="none" stroke="#78939a" stroke-width="34" opacity=".55"/><path d="M70 100 Q230 170 360 290 T600 350 T900 180" fill="none" stroke="#9a8054" stroke-width="7" stroke-dasharray="14 8"/><path d="M180 520 Q300 420 360 290 T700 100" fill="none" stroke="#9a8054" stroke-width="6" stroke-dasharray="12 8"/><path d="M80 80L220 35 350 80 310 190 160 210Z" fill="#6d7e60" opacity=".55"/><path d="M710 350L850 310 970 400 900 550 750 520Z" fill="#6d7e60" opacity=".45"/><g fill="#8b7651" opacity=".65"><path d="M90 260l40-75 30 75z"/><path d="M140 280l45-85 35 85z"/><path d="M790 160l45-85 35 85z"/></g><g fill="#665238" font-family="Georgia" font-size="20" font-style="italic"><text x="360" y="90">Northern Woodlands</text><text x="650" y="560">Southern Reach</text><text x="60" y="350">Western Hills</text></g></svg>
+  <button class="place" style="left:42%;top:39%" data-place="Town Market">✦ Town Market</button><button class="place" style="left:13%;top:68%" data-place="Westfield Village">◆ Westfield Village</button><button class="place" style="left:72%;top:24%" data-place="Northwatch">◆ Northwatch</button><button class="place" style="left:68%;top:73%" data-place="Southern Farmlands">◇ Southern Farmlands</button>
+ </div>
+ <div class="legend"><span>✦ Current location</span><span>◆ Known settlement</span><span>◇ Region of interest</span><span>Minor locations are discovered through exploration.</span></div>
+</div>
+</div>
+<script>
+const entries=[["Character Sheet","♙"],["Inventory","▣"],["World Map","⌖"],["Abilities / Skills","✧"],["Profession","⚒"],["Finances","◈"],["Relationships","♧"],["Journal","▤"],["Settings","⚙"]];
+const nav=document.getElementById("nav");
+entries.forEach(([name,ico])=>{let b=document.createElement("button");b.className="navbtn";b.dataset.menu=name;b.innerHTML=`<span class="ico">${ico}</span><span class="navlabel">${name}</span>`;nav.appendChild(b)});
+const $=id=>document.getElementById(id),overlay=$("overlay"),map=$("map");
+const descriptions={"Town Market":"Merchants trade beneath colourful awnings as townsfolk move through the square.","Westfield Village":"A small settlement of cottages, workshops, and fields beyond the town road.","Northwatch":"A northern settlement near the wooded frontier.","Southern Farmlands":"Open fields, farmsteads, and country lanes stretch across the southern region."};
+function toast(s){$("toast").textContent=s;$("toast").classList.add("show");clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>$("toast").classList.remove("show"),2600)}
+function setLocation(place){$("locationHeader").textContent=place;$("sceneLocation").textContent=place;$("locationTitle").textContent=place;$("locationDescription").textContent=descriptions[place];$("status").textContent="You are now at "+place+".";map.hidden=true;toast("Location selected: "+place+". Travel is illustrative in this prototype.");}
+const content={
+"Character Sheet":`<div class="grid"><div class="card"><h3>Personal Details</h3><p><b>Name:</b> Alden<br><b>Age:</b> 24<br><b>Status:</b> Citizen<br><b>Birthplace:</b> Not recorded</p></div><div class="card"><h3>Physical Condition</h3><p><b>Health:</b> 100 / 100<br><b>Stamina:</b> 85 / 100<br><b>Hunger:</b> 20 / 100</p></div><div class="card"><h3>Character Background</h3><p>History, family origins, personality, and personal characteristics.</p></div><div class="card"><h3>Social Standing</h3><p>Reputation, status, community recognition, and personal milestones.</p></div></div>`,
+"Inventory":`<div class="card"><h3>Carried Possessions</h3><div class="grid">${["Clothing","Food","Tools","Materials","Personal Items","Valuables"].map(x=>`<div class="card">◈ ${x}</div>`).join("")}</div><p>Items, equipment, storage, weight, and descriptions.</p></div>`,
+"Abilities / Skills":`<div class="card"><h3>Skills and Abilities</h3>${["Craftsmanship","Agriculture","Trading","Cooking","Social Skills","Animal Husbandry"].map(x=>`<p>${x}<span style="float:right">Untrained</span></p>`).join("")}</div>`,
+"Profession":`<div class="grid"><div class="card"><h3>Current Profession</h3><p>Not yet employed.</p></div><div class="card"><h3>Work and Opportunities</h3><p>Employment, available tasks, work history, and professional progression.</p></div></div>`,
+"Finances":`<div class="card"><h3>Personal Ledger</h3><h2>125 Gold</h2><p>Income · Expenses · Transactions · Savings · Debts · Property</p></div>`,
+"Relationships":`<div class="grid"><div class="card"><h3>Family</h3><p>Family members and household relationships.</p></div><div class="card"><h3>Acquaintances</h3><p>Friends, neighbours, colleagues, and contacts.</p></div><div class="card"><h3>Social Standing</h3><p>Reputation, trust, and community relationships.</p></div></div>`,
+"Journal":`<div class="card"><h3>Personal Journal</h3><p><b>14th Day of Spring</b><br>Arrived at the Town Market. The marketplace is busy with merchants and townsfolk.</p><p>Events, discoveries, milestones, and personal notes will be recorded here.</p></div>`,
+"Settings":`<div class="card"><h3>Game Settings</h3><p>Interface, display, audio, accessibility, and control preferences.</p><p><label><input type="checkbox" checked> Show contextual interaction hints</label></p><p><label><input type="checkbox" checked> Confirm before exiting</label></p></div>`,
+"Exit Game":`<div class="card"><h3>Leave Arethtera?</h3><p>Your character's location and world state would be saved before exiting.</p><button class="close" onclick="toast('Save and exit are not connected in this prototype.')">Save and Exit</button> <button class="close" onclick="closePanel()">Return to Game</button></div>`
+};
+function openMenu(name){document.querySelectorAll(".navbtn[data-menu]").forEach(b=>b.classList.toggle("selected",b.dataset.menu===name));if(name==="World Map"){overlay.hidden=true;map.hidden=false;return}map.hidden=true;$("panelTitle").textContent=name;$("panelBody").innerHTML=content[name]||"";overlay.hidden=false}
+function closePanel(){overlay.hidden=true;document.querySelectorAll(".navbtn").forEach(b=>b.classList.remove("selected"))}
+document.addEventListener("click",e=>{let b=e.target.closest("[data-menu]");if(b)openMenu(b.dataset.menu)});
+$("collapse").onclick=()=>$("sidebar").classList.toggle("collapsed");
+$("closePanel").onclick=closePanel;$("mapBtn").onclick=()=>openMenu("World Map");
+$("closeMap").onclick=()=>{map.hidden=true;document.querySelectorAll(".navbtn").forEach(b=>b.classList.remove("selected"))};
+document.querySelectorAll(".place").forEach(b=>b.onclick=()=>setLocation(b.dataset.place));
+$("interact").onclick=()=>toast("Nearby: Speak to merchant · Browse goods · Look around · Inspect stalls");
+document.addEventListener("keydown",e=>{if(e.key==="Escape"){if(!map.hidden)$("closeMap").click();else if(!overlay.hidden)closePanel()}if(e.key.toLowerCase()==="e"&&overlay.hidden&&map.hidden)toast("Nearby interactions: Speak to merchant · Browse goods · Look around")});
+/* Production clock note: obtain authoritative UTC from the game server, then format it in the character's in-game IANA time zone. */
+</script>
+</body></html>

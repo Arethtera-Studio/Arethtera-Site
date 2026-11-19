@@ -1,6 +1,7 @@
 
 const FORUM_BASE_URL = "https://forum.arethtera.com";
 const LANDING_PAGE_URL = "https://arethtera.com/";
+const GAME_INTERFACE = "https://arethtera.com/interface/index.html"
 
 document.addEventListener("DOMContentLoaded", () => {
   const year = document.getElementById("year");
@@ -57,40 +58,50 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Game modal
+   // Game Interface
   const modal = document.getElementById("gameModal");
+  const launchButton = document.getElementById("launchButton");
+  const gameFrame = document.getElementById("gameFrame");
+  const closeButton = document.getElementById("modalClose");
 
   const closeModal = () => {
-    if (modal) modal.hidden = true;
+    if (modal) {
+      modal.hidden = true;
+      document.body.style.overflow = "";
+    }
   };
 
-  const launchButton = document.getElementById("launchButton");
-
-  if (launchButton && modal) {
+  // Launch game
+  if (launchButton && modal && gameFrame) {
     launchButton.addEventListener("click", () => {
+      if (gameFrame.getAttribute("src") === "about:blank") {
+        gameFrame.src = GAME_INTERFACE;
+      }
+
       modal.hidden = false;
+      document.body.style.overflow = "hidden";
     });
   }
 
-  const closeButton = document.getElementById("modalClose");
-  const okayButton = document.getElementById("modalOkay");
-
+  // Close button
   if (closeButton) {
     closeButton.addEventListener("click", closeModal);
   }
 
-  if (okayButton) {
-    okayButton.addEventListener("click", closeModal);
-  }
-
+  // Close when clicking outside the game
   if (modal) {
     modal.addEventListener("click", event => {
-      if (event.target === modal) closeModal();
+      if (event.target === modal) {
+        closeModal();
+      }
     });
   }
 
+  // Close with Escape
   document.addEventListener("keydown", event => {
-    if (event.key === "Escape") closeModal();
+    if (event.key === "Escape" && modal && !modal.hidden) {
+      closeModal();
+    }
   });
 });
 
