@@ -1,3 +1,4 @@
+// Interface File
 const entries=[["Character Sheet","♙"],["Inventory","▣"],["World Map","⌖"],["Abilities / Skills","✧"],["Profession","⚒"],["Finances","◈"],["Relationships","♧"],["Journal","▤"],["Settings","⚙"]];
 const nav=document.getElementById("nav");
 entries.forEach(([name,ico])=>{let b=document.createElement("button");b.className="navbtn";b.dataset.menu=name;b.innerHTML=`<span class="ico">${ico}</span><span class="navlabel">${name}</span>`;nav.appendChild(b)});

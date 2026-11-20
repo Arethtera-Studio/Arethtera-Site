@@ -1,3 +1,4 @@
+Interface File
 :root{--bg:#1c2631;--panel:#293542;--gold:#d5b77b;--paper:#d8c49d;--ink:#493a29;--muted:#aeb8c3}
 *{box-sizing:border-box}body{margin:0;background:#111820;color:#eee;font-family:Georgia,serif}button{font:inherit;cursor:pointer}
 .app{height:100vh;min-height:600px;display:flex;flex-direction:column;overflow:hidden}
