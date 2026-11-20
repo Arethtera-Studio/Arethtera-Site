@@ -1,56 +1,180 @@
 <!doctype html>
 <html lang="en">
-<head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<link rel="stylesheet" href="../css/interface.css">
-<script src="../js/interface.js" defer></script>
-<title>Arethtera — Interface Prototype</title>
-
-</head>
-<body>
-<div class="app">
-<header>
- <div class="brandrow"><div class="brand">♜ ARETHTERA <small>LIFE SIMULATOR</small></div><span class="active">● WORLD ACTIVE</span></div>
- <div class="stats">
-  <div class="stat"><div class="label">Character</div><div class="value">Alden</div></div>
-  <div class="stat"><div class="label">♥ HP</div><div class="value">100 / 100</div><div class="meter"><i class="hp"></i></div></div>
-  <div class="stat"><div class="label">ϟ Stamina</div><div class="value">85 / 100</div><div class="meter"><i class="stam"></i></div></div>
-  <div class="stat"><div class="label">Hunger</div><div class="value">20 / 100</div><div class="meter"><i class="hun"></i></div></div>
- </div>
- <div class="stats bottom">
-  <div class="stat"><div class="label">⌖ Current Location</div><div class="value" id="locationHeader">Town Market</div></div>
-  <div class="stat"><div class="label">◈ Money</div><div class="value">125 Gold</div></div>
-  <div class="stat"><div class="label">◷ Local Time · Date</div><div class="value" id="clock">10:35 AM · 14th Day of Spring</div></div>
- </div>
-</header>
-<div class="layout">
-<aside class="sidebar" id="sidebar">
- <div class="navtop"><span class="navtitle">NAVIGATION</span><button id="collapse" title="Collapse navigation">☰</button></div>
- <nav id="nav"></nav>
- <div class="exit"><button class="navbtn" data-menu="Exit Game"><span class="ico">⇥</span><span class="navlabel">Exit Game</span></button></div>
-</aside>
-<main class="main">
- <div class="toolbar"><div><span class="pill">FIRST-PERSON VIEW</span> <span id="sceneLocation">Town Market</span></div><div><button id="interact">◎ Interact · E</button> <button id="mapBtn">⌖ World Map</button></div></div>
- <section class="scene" aria-label="Illustrative medieval marketplace scene">
-  <div class="sky"></div><div class="sun"></div><div class="hill"></div><div class="hill r"></div><div class="wall"></div>
-  <div class="house"><span class="window"></span></div><div class="house right"><span class="window"></span></div><div class="awning"></div><div class="stall"></div><div class="road"></div>
-  <div class="person p1"></div><div class="person p2"></div><div class="person p3"></div><div class="vignette"></div>
-  <div class="loccard"><strong id="locationTitle">Town Market</strong><span id="locationDescription">Merchants trade beneath colourful awnings as townsfolk move through the square.</span></div>
-  <div class="hint">W A S D · MOVE &nbsp; | &nbsp; MOUSE · LOOK &nbsp; | &nbsp; E · INTERACT</div>
- </section>
- <div class="scenefoot"><span id="status">You are standing in the busy town marketplace.</span><span>ARETHTERA · PERSISTENT WORLD · 1:1 TIME</span></div>
-</main>
-</div>
-<div class="footer"><span>ARETHTERA · INTERFACE PROTOTYPE</span><span>World simulation and character data are illustrative</span></div>
-<div class="toast" id="toast"></div>
-<div class="overlay" id="overlay" hidden><section class="panel"><div class="panelhead"><div><div class="ptitle" id="panelTitle"></div><div class="psub">THE RECORDS OF YOUR LIFE IN ARETHTERA</div></div><button class="close" id="closePanel">✕ Close</button></div><div class="panelbody" id="panelBody"></div></section></div>
-<div class="map" id="map" hidden>
- <div class="maphead"><div><div class="maptitle">✥ World Map</div><div class="psub">Known roads and major settlements · Select a destination to inspect</div></div><button class="close" id="closeMap">✕ Return to World</button></div>
- <div class="mapcanvas">
-  <svg viewBox="0 0 1000 600" preserveAspectRatio="none"><defs><pattern id="dots" width="28" height="28" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#806b48" opacity=".35"/></pattern></defs><rect width="1000" height="600" fill="url(#dots)"/><path d="M0 450 Q180 370 260 430 T500 400 T760 430 T1000 350" fill="none" stroke="#78939a" stroke-width="34" opacity=".55"/><path d="M70 100 Q230 170 360 290 T600 350 T900 180" fill="none" stroke="#9a8054" stroke-width="7" stroke-dasharray="14 8"/><path d="M180 520 Q300 420 360 290 T700 100" fill="none" stroke="#9a8054" stroke-width="6" stroke-dasharray="12 8"/><path d="M80 80L220 35 350 80 310 190 160 210Z" fill="#6d7e60" opacity=".55"/><path d="M710 350L850 310 970 400 900 550 750 520Z" fill="#6d7e60" opacity=".45"/><g fill="#8b7651" opacity=".65"><path d="M90 260l40-75 30 75z"/><path d="M140 280l45-85 35 85z"/><path d="M790 160l45-85 35 85z"/></g><g fill="#665238" font-family="Georgia" font-size="20" font-style="italic"><text x="360" y="90">Northern Woodlands</text><text x="650" y="560">Southern Reach</text><text x="60" y="350">Western Hills</text></g></svg>
-  <button class="place" style="left:42%;top:39%" data-place="Town Market">✦ Town Market</button><button class="place" style="left:13%;top:68%" data-place="Westfield Village">◆ Westfield Village</button><button class="place" style="left:72%;top:24%" data-place="Northwatch">◆ Northwatch</button><button class="place" style="left:68%;top:73%" data-place="Southern Farmlands">◇ Southern Farmlands</button>
- </div>
- <div class="legend"><span>✦ Current location</span><span>◆ Known settlement</span><span>◇ Region of interest</span><span>Minor locations are discovered through exploration.</span></div>
-</div>
-</div>
-</body></html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <link rel="stylesheet" href="../css/interface.css">
+        <script src="../js/interface.js" defer></script>
+        <title>Arethtera — Interface Prototype</title>
+    </head>
+    <body>
+        <div class="app">
+            <header>
+                <div class="brandrow">
+                    <div class="brand">
+                        ♜ ARETHTERA <small>LIFE SIMULATOR</small>
+                    </div>
+                    <span class="active">● WORLD ACTIVE</span>
+                </div>
+                <div class="stats">
+                    <div class="stat">
+                        <div class="label">Character</div>
+                        <div class="value">Alden</div>
+                    </div>
+                    <div class="stat">
+                        <div class="label">♥ HP</div>
+                        <div class="value">100 / 100</div>
+                        <div class="meter">
+                            <i class="hp"></i>
+                        </div>
+                    </div>
+                    <div class="stat">
+                        <div class="label">ϟ Stamina</div>
+                        <div class="value">85 / 100</div>
+                        <div class="meter">
+                            <i class="stam"></i>
+                        </div>
+                    </div>
+                    <div class="stat">
+                        <div class="label">Hunger</div>
+                        <div class="value">20 / 100</div>
+                        <div class="meter">
+                            <i class="hun"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="stats bottom">
+                    <div class="stat">
+                        <div class="label">⌖ Current Location</div>
+                        <div class="value" id="locationHeader">Town Market</div>
+                    </div>
+                    <div class="stat">
+                        <div class="label">◈ Money</div>
+                        <div class="value">125 Gold</div>
+                    </div>
+                    <div class="stat">
+                        <div class="label">◷ Local Time · Date</div>
+                        <div class="value" id="clock">10:35 AM · 14th Day of Spring</div>
+                    </div>
+                </div>
+            </header>
+            <div class="layout">
+                <aside class="sidebar" id="sidebar">
+                    <div class="navtop">
+                        <span class="navtitle">NAVIGATION</span>
+                        <button id="collapse" title="Collapse navigation">☰</button>
+                    </div>
+                    <nav id="nav"></nav>
+                    <div class="exit">
+                        <button class="navbtn" data-menu="Exit Game">
+                            <span class="ico">⇥</span>
+                            <span class="navlabel">Exit Game</span>
+                        </button>
+                    </div>
+                </aside>
+                <main class="main">
+                    <div class="toolbar">
+                        <div>
+                            <span class="pill">FIRST-PERSON VIEW</span>
+                            <span id="sceneLocation">Town Market</span>
+                        </div>
+                        <div>
+                            <button id="interact">◎ Interact · E</button>
+                            <button id="mapBtn">⌖ World Map</button>
+                        </div>
+                    </div>
+                    <section class="scene" aria-label="Illustrative medieval marketplace scene">
+                        <div class="sky"></div>
+                        <div class="sun"></div>
+                        <div class="hill"></div>
+                        <div class="hill r"></div>
+                        <div class="wall"></div>
+                        <div class="house">
+                            <span class="window"></span>
+                        </div>
+                        <div class="house right">
+                            <span class="window"></span>
+                        </div>
+                        <div class="awning"></div>
+                        <div class="stall"></div>
+                        <div class="road"></div>
+                        <div class="person p1"></div>
+                        <div class="person p2"></div>
+                        <div class="person p3"></div>
+                        <div class="vignette"></div>
+                        <div class="loccard">
+                            <strong id="locationTitle">Town Market</strong>
+                            <span id="locationDescription">Merchants trade beneath colourful awnings as townsfolk move through the square.</span>
+                        </div>
+                        <div class="hint">W A S D · MOVE &nbsp; | &nbsp; MOUSE · LOOK &nbsp; | &nbsp; E · INTERACT</div>
+                    </section>
+                    <div class="scenefoot">
+                        <span id="status">You are standing in the busy town marketplace.</span>
+                        <span>ARETHTERA · PERSISTENT WORLD · 1:1 TIME</span>
+                    </div>
+                </main>
+            </div>
+            <div class="footer">
+                <span>ARETHTERA · INTERFACE PROTOTYPE</span>
+                <span>World simulation and character data are illustrative</span>
+            </div>
+            <div class="toast" id="toast"></div>
+            <div class="overlay" id="overlay" hidden>
+                <section class="panel">
+                    <div class="panelhead">
+                        <div>
+                            <div class="ptitle" id="panelTitle"></div>
+                            <div class="psub">THE RECORDS OF YOUR LIFE IN ARETHTERA</div>
+                        </div>
+                        <button class="close" id="closePanel">✕ Close</button>
+                    </div>
+                    <div class="panelbody" id="panelBody"></div>
+                </section>
+            </div>
+            <div class="map" id="map" hidden>
+                <div class="maphead">
+                    <div>
+                        <div class="maptitle">✥ World Map</div>
+                        <div class="psub">Known roads and major settlements · Select a destination to inspect</div>
+                    </div>
+                    <button class="close" id="closeMap">✕ Return to World</button>
+                </div>
+                <div class="mapcanvas">
+                    <svg viewBox="0 0 1000 600" preserveAspectRatio="none">
+                        <defs>
+                            <pattern id="dots" width="28" height="28" patternUnits="userSpaceOnUse">
+                                <circle cx="2" cy="2" r="1" fill="#806b48" opacity=".35"/>
+                            </pattern>
+                        </defs>
+                        <rect width="1000" height="600" fill="url(#dots)"/>
+                        <path d="M0 450 Q180 370 260 430 T500 400 T760 430 T1000 350" fill="none" stroke="#78939a" stroke-width="34" opacity=".55"/>
+                        <path d="M70 100 Q230 170 360 290 T600 350 T900 180" fill="none" stroke="#9a8054" stroke-width="7" stroke-dasharray="14 8"/>
+                        <path d="M180 520 Q300 420 360 290 T700 100" fill="none" stroke="#9a8054" stroke-width="6" stroke-dasharray="12 8"/>
+                        <path d="M80 80L220 35 350 80 310 190 160 210Z" fill="#6d7e60" opacity=".55"/>
+                        <path d="M710 350L850 310 970 400 900 550 750 520Z" fill="#6d7e60" opacity=".45"/>
+                        <g fill="#8b7651" opacity=".65">
+                            <path d="M90 260l40-75 30 75z"/>
+                            <path d="M140 280l45-85 35 85z"/>
+                            <path d="M790 160l45-85 35 85z"/>
+                        </g>
+                        <g fill="#665238" font-family="Georgia" font-size="20" font-style="italic">
+                            <text x="360" y="90">Northern Woodlands</text>
+                            <text x="650" y="560">Southern Reach</text>
+                            <text x="60" y="350">Western Hills</text>
+                        </g>
+                    </svg>
+                    <button class="place" style="left:42%;top:39%" data-place="Town Market">✦ Town Market</button>
+                    <button class="place" style="left:13%;top:68%" data-place="Westfield Village">◆ Westfield Village</button>
+                    <button class="place" style="left:72%;top:24%" data-place="Northwatch">◆ Northwatch</button>
+                    <button class="place" style="left:68%;top:73%" data-place="Southern Farmlands">◇ Southern Farmlands</button>
+                </div>
+                <div class="legend">
+                    <span>✦ Current location</span>
+                    <span>◆ Known settlement</span>
+                    <span>◇ Region of interest</span>
+                    <span>Minor locations are discovered through exploration.</span>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
